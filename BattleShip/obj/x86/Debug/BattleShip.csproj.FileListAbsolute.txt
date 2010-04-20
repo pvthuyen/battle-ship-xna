@@ -1,0 +1,7 @@
+D:\Projects\XNA\BattleShip\BattleShip\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Projects\XNA\BattleShip\BattleShip\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+D:\Projects\XNA\BattleShip\BattleShip\bin\x86\Debug\Content\Font\Arial.xnb
+D:\Projects\XNA\BattleShip\BattleShip\bin\x86\Debug\BattleShip.exe
+D:\Projects\XNA\BattleShip\BattleShip\bin\x86\Debug\BattleShip.pdb
+D:\Projects\XNA\BattleShip\BattleShip\obj\x86\Debug\BattleShip.exe
+D:\Projects\XNA\BattleShip\BattleShip\obj\x86\Debug\BattleShip.pdb
