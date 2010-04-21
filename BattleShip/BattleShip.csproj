@@ -95,6 +95,7 @@
     <Compile Include="Core\Managers\ResourceManager.cs" />
     <Compile Include="Core\Managers\SoundManager.cs" />
     <Compile Include="Core\Managers\SpriteManager.cs" />
+    <Compile Include="Core\Managers\UnitManager.cs" />
     <Compile Include="Core\Scences\GameScence.cs" />
     <Compile Include="Core\Scences\HelpScence.cs" />
     <Compile Include="Core\Scences\StartScence.cs" />
@@ -140,13 +141,6 @@
       <ProductName>Microsoft XNA Framework Redistributable 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resource\Background\" />
-    <Folder Include="Resource\Menu\" />
-    <Folder Include="Resource\Sound\" />
-    <Folder Include="Resource\Sprite\Computer\" />
-    <Folder Include="Resource\Sprite\Player\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

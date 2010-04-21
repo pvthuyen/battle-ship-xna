@@ -7,18 +7,18 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Projects\XNA\BattleShip\BattleShip\bin\x86\Debug\Content\Font\Arial.xnb</Output>
-      <Time>2010-04-20T23:29:52.037451+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Font\Arial.xnb</Output>
+      <Time>2010-04-20T23:59:50+07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>D:\Projects\XNA\BattleShip\BattleShip\Content\</RootDirectory>
-      <LoggerRootDirectory>D:\Projects\XNA\BattleShip\BattleShip\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\Projects\XNA\BattleShip\BattleShip\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\Projects\XNA\BattleShip\BattleShip\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>E:\battle-ship-xna\BattleShip\Content\</RootDirectory>
+      <LoggerRootDirectory>E:\battle-ship-xna\BattleShip\</LoggerRootDirectory>
+      <IntermediateDirectory>E:\battle-ship-xna\BattleShip\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
