@@ -26,5 +26,10 @@ namespace BattleShip.Core.Managers
             imgForegroundHelpScence = this.m_contentManager.Load<Texture2D>("foreground.jpg");
              */
         }
+
+        internal Texture2D LoadTexture(string sFileName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
