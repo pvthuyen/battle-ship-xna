@@ -1,2 +1,3 @@
 D:\Projects\XNA\BattleShip\BattleShip\Content\obj\x86\Debug\ResolveAssemblyReference.cache
 E:\battle-ship-xna\BattleShip\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Data\battle-ship-xna\BattleShip\Content\obj\x86\Debug\ResolveAssemblyReference.cache

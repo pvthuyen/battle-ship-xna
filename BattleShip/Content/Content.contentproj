@@ -45,10 +45,33 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resource\Sprite\Computer\Tboot_Trans.png">
+      <Name>Tboot_Trans</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resource\Sprite\Computer\Tfischerboot_Trans.png">
+      <Name>Tfischerboot_Trans</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resource\Sprite\Computer\Tgrokanbo_Trans.png">
+      <Name>Tgrokanbo_Trans</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Resource\Background\" />
     <Folder Include="Resource\Menu\" />
     <Folder Include="Resource\Sound\" />
-    <Folder Include="Resource\Sprite\Computer\" />
     <Folder Include="Resource\Sprite\Player\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
