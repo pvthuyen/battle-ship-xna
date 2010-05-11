@@ -69,8 +69,55 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resource\Menu\1.jpg">
+      <Name>1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Resource\Menu\main_1260140920_happy_aquarium_cheats.jpg">
+      <Name>main_1260140920_happy_aquarium_cheats</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Resource\Sprite\Computer\Thandelsschiff_Trans.png">
+      <Name>Thandelsschiff_Trans</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Resource\Sprite\Computer\Tklpirschi_Trans.png">
+      <Name>Tklpirschi_Trans</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Resource\Sprite\Computer\Twikingerschiff_Trans.png">
+      <Name>Twikingerschiff_Trans</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resource\Menu\Intro.png">
+      <Name>Intro</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resource\Menu\Button.png">
+      <Name>Button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Resource\Background\" />
-    <Folder Include="Resource\Menu\" />
     <Folder Include="Resource\Sound\" />
     <Folder Include="Resource\Sprite\Player\" />
   </ItemGroup>

@@ -97,6 +97,7 @@
     <Compile Include="Core\Managers\SoundManager.cs" />
     <Compile Include="Core\Managers\SpriteManager.cs" />
     <Compile Include="Core\Managers\UnitManager.cs" />
+    <Compile Include="Core\Scences\ActionScence.cs" />
     <Compile Include="Core\Scences\GameScence.cs" />
     <Compile Include="Core\Scences\HelpScence.cs" />
     <Compile Include="Core\Scences\StartScence.cs" />

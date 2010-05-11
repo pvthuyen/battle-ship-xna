@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<MenuItem>
+	<Item name="Start Game"/>
+	<Item name="Option">
+		<Item name="Sound">
+			<Item name="On"/>
+			<Item name="Off"/>
+		</Item>
+		<Item name="Level">
+			<Item name="Easy"/>
+			<Item name="Normal"/>
+			<Item name="Hard"/>
+		</Item>
+	</Item>
+	<Item name="Help"/>
+	<Item name="Exit Game"/>
+</MenuItem>

@@ -14,64 +14,55 @@ namespace BattleShip.Core.Managers
 
         public SoundEffect Explosion
         {
-            get { return m_explosion; }
-            set { m_explosion = value; }
+            get { return m_explosion; }            
         }
         private SoundEffect m_newMeteor;
 
         public SoundEffect NewMeteor
         {
-            get { return m_newMeteor; }
-            set { m_newMeteor = value; }
+            get { return m_newMeteor; }            
         }
         private SoundEffect m_menuBack;
 
         public SoundEffect MenuBack
         {
-            get { return m_menuBack; }
-            set { m_menuBack = value; }
+            get { return m_menuBack; }            
         }
         private SoundEffect m_menuSelect;
 
         public SoundEffect MenuSelect
         {
-            get { return m_menuSelect; }
-            set { m_menuSelect = value; }
+            get { return m_menuSelect; }            
         }
         private SoundEffect m_menuScroll;
 
         public SoundEffect MenuScroll
         {
-            get { return m_menuScroll; }
-            set { m_menuScroll = value; }
+            get { return m_menuScroll; }            
         }
         private SoundEffect m_powerGet;
 
         public SoundEffect PowerGet
         {
-            get { return m_powerGet; }
-            set { m_powerGet = value; }
+            get { return m_powerGet; }            
         }
         private SoundEffect m_powerShow;
 
         public SoundEffect PowerShow
         {
-            get { return m_powerShow; }
-            set { m_powerShow = value; }
+            get { return m_powerShow; }            
         }
         private Song m_backMusic;
 
         public Song BackMusic
         {
-            get { return m_backMusic; }
-            set { m_backMusic = value; }
+            get { return m_backMusic; }            
         }
         private Song m_startMusic;
 
         public Song StartMusic
         {
-            get { return m_startMusic; }
-            set { m_startMusic = value; }
+            get { return m_startMusic; }            
         }
 
         public void LoadContent(ContentManager content)

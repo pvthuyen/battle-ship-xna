@@ -32,6 +32,9 @@ namespace BattleShip.Core.GameComponents
 
         protected string m_OldSelectedMenu;
 
+        protected Texture2D m_textureButton;
+        protected Rectangle m_ButtonRect;
+
         //handle input
         protected InputManager m_inputManager;
         //handle sound
@@ -136,11 +139,15 @@ namespace BattleShip.Core.GameComponents
                     font = this.m_regularFont;
                     color = this.m_regularColor;
                 }
+                //draw button
+                int x = (int)this.m_menuPosition.X;                
+                this.m_spriteBatch.Draw(this.m_textureButton, new Vector2(x - 30, y - this.m_ButtonRect.Height / 2 + 15), Color.White);
+                                
                 //draw text shadow
-                this.m_spriteBatch.DrawString(font, this.m_menuItems[i], new Vector2(this.m_menuPosition.X + 1, y + 1), Color.Black);
-                this.m_spriteBatch.DrawString(font, this.m_menuItems[i], new Vector2(this.m_menuPosition.X, y), color);
+                this.m_spriteBatch.DrawString(font, this.m_menuItems[i], new Vector2(x + 1, y + 1), Color.Black);
+                this.m_spriteBatch.DrawString(font, this.m_menuItems[i], new Vector2(x, y), color);
 
-                y += font.LineSpacing;
+                y += this.m_ButtonRect.Height + 5;
             }
             base.Draw(gameTime);
         }
@@ -195,7 +202,25 @@ namespace BattleShip.Core.GameComponents
                             m_OldSelectedMenu = StrTmp;
                         }
                     }
-                }                                
+                }   
+                
+                //////////////////////
+                switch (StrTmp)
+                {
+                    case "Start Game":
+                        m_SelectedMenuItem = GameMenuItem.StartGame;
+                        break;
+                    case "Option":
+                        m_SelectedMenuItem = GameMenuItem.Option;
+                        break;
+                    case "Help":
+                        m_SelectedMenuItem = GameMenuItem.Help;
+                        break;
+                    case "Exit Game":
+                        m_SelectedMenuItem = GameMenuItem.Exit;
+                        break;
+                }
+             
             }
 
             if (back)
@@ -226,9 +251,12 @@ namespace BattleShip.Core.GameComponents
             base.Update(gameTime);
         }
 
-        public TextMenuComponent(Game game, SpriteFont normalFont, SpriteFont selectFont)
+        public TextMenuComponent(Game game, SpriteFont normalFont, SpriteFont selectFont, Texture2D textureButton)
             : base(game)
         {
+            m_textureButton = textureButton;
+            m_ButtonRect = new Rectangle(0, 0, m_textureButton.Width, m_textureButton.Height);
+
             m_regularFont = normalFont;
             m_selectedFont = selectFont;
             this.m_menuItems = new List<string>();
@@ -237,6 +265,8 @@ namespace BattleShip.Core.GameComponents
             m_soundManager = game.Services.GetService(typeof(SoundManager)) as SoundManager;
 
             m_inputManager = new InputManager();
+
+            m_SelectedMenuItem = GameMenuItem.None;
         }
 
         internal void SetXmlMenu(string p)
@@ -245,5 +275,20 @@ namespace BattleShip.Core.GameComponents
             this.m_XmlMenu.Load(p);
             this.m_menuItems = this.GetMenuItems(this.m_XmlMenu.DocumentElement.ChildNodes);
         }
+
+        private GameMenuItem m_SelectedMenuItem;
+        public GameMenuItem SelectedMenuItem
+        {
+            get { return m_SelectedMenuItem; }
+            set { this.m_SelectedMenuItem = value; }
+        }
+        public enum GameMenuItem
+        {
+            StartGame,
+            Option,
+            Help,
+            Exit,
+            None
+        };
     }
 }

@@ -7,8 +7,26 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\Data\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Font\Arial.xnb</Output>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Font\Arial.xnb</Output>
       <Time>2010-04-26T21:42:36+07:00</Time>
+    </Item>
+    <Item>
+      <Source>Resource\Menu\1.jpg</Source>
+      <Name>Resource\Menu\1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\1.xnb</Output>
+      <Time>2010-05-11T22:38:34+07:00</Time>
+    </Item>
+    <Item>
+      <Source>Resource\Menu\main_1260140920_happy_aquarium_cheats.jpg</Source>
+      <Name>Resource\Menu\main_1260140920_happy_aquarium_cheats</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\main_1260140920_happy_aquarium_cheats.xnb</Output>
+      <Time>2010-05-11T22:38:34+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Sprite\Computer\Tboot_Trans.png</Source>
@@ -16,7 +34,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\Data\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tboot_Trans.xnb</Output>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tboot_Trans.xnb</Output>
       <Time>2010-04-26T21:45:40+07:00</Time>
     </Item>
     <Item>
@@ -25,7 +43,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\Data\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tfischerboot_Trans.xnb</Output>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tfischerboot_Trans.xnb</Output>
       <Time>2010-04-26T21:45:52+07:00</Time>
     </Item>
     <Item>
@@ -34,18 +52,63 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\Data\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tgrokanbo_Trans.xnb</Output>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tgrokanbo_Trans.xnb</Output>
       <Time>2010-04-26T21:46:04+07:00</Time>
+    </Item>
+    <Item>
+      <Source>Resource\Sprite\Computer\Thandelsschiff_Trans.png</Source>
+      <Name>Resource\Sprite\Computer\Thandelsschiff_Trans</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Thandelsschiff_Trans.xnb</Output>
+      <Time>2010-05-07T11:31:26+07:00</Time>
+    </Item>
+    <Item>
+      <Source>Resource\Sprite\Computer\Tklpirschi_Trans.png</Source>
+      <Name>Resource\Sprite\Computer\Tklpirschi_Trans</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tklpirschi_Trans.xnb</Output>
+      <Time>2010-05-07T11:56:02+07:00</Time>
+    </Item>
+    <Item>
+      <Source>Resource\Sprite\Computer\Twikingerschiff_Trans.png</Source>
+      <Name>Resource\Sprite\Computer\Twikingerschiff_Trans</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Twikingerschiff_Trans.xnb</Output>
+      <Time>2010-05-07T10:54:34+07:00</Time>
+    </Item>
+    <Item>
+      <Source>Resource\Menu\Intro.png</Source>
+      <Name>Resource\Menu\Intro</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\Intro.xnb</Output>
+      <Time>2010-05-12T00:06:28+07:00</Time>
+    </Item>
+    <Item>
+      <Source>Resource\Menu\Button.png</Source>
+      <Name>Resource\Menu\Button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\Button.xnb</Output>
+      <Time>2010-05-12T00:21:22+07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>E:\Data\battle-ship-xna\BattleShip\Content\</RootDirectory>
-      <LoggerRootDirectory>E:\Data\battle-ship-xna\BattleShip\</LoggerRootDirectory>
-      <IntermediateDirectory>E:\Data\battle-ship-xna\BattleShip\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>E:\Data\battle-ship-xna\BattleShip\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>E:\battle-ship-xna\BattleShip\Content\</RootDirectory>
+      <LoggerRootDirectory>E:\battle-ship-xna\BattleShip\</LoggerRootDirectory>
+      <IntermediateDirectory>E:\battle-ship-xna\BattleShip\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -74,7 +137,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2010-03-10T23:11:52.203125+07:00</Value>
+        <Value>2010-05-11T22:18:21.5610429+07:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
