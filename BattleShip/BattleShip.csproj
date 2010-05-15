@@ -101,6 +101,7 @@
     <Compile Include="Core\Scences\GameScence.cs" />
     <Compile Include="Core\Scences\HelpScence.cs" />
     <Compile Include="Core\Scences\StartScence.cs" />
+    <Compile Include="Core\Sprites\Player.cs" />
     <Compile Include="Core\Sprites\Sprite.cs" />
     <Compile Include="Core\Utils\Utility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

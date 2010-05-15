@@ -11,6 +11,8 @@ namespace BattleShip.Core.Managers
     {
         private ContentManager m_contentManager;
 
+        public Texture2D imgPlayer;
+
         //texture for help scence
         public Texture2D imgBackgroundHelpScence;
         public Texture2D imgForegroundHelpScence;
@@ -46,6 +48,8 @@ namespace BattleShip.Core.Managers
 
             smallFont = this.m_contentManager.Load<SpriteFont>(@"Font/Arial");
             largeFont = this.m_contentManager.Load<SpriteFont>(@"Font/Arial");
+
+            imgPlayer = this.m_contentManager.Load<Texture2D>(@"Resource/Sprite/Computer/Tboot_Trans");
         }
 
         internal Texture2D LoadTexture(string sFileName)

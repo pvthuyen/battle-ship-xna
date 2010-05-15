@@ -7,32 +7,28 @@ using Microsoft.Xna.Framework;
 
 namespace BattleShip.Core.Sprites
 {
-    public abstract class Sprite
-    {                
-        protected Point m_FrameSize;
-        protected int m_CollisionOffset;
-        protected Point m_CurrentFrame;
-        protected Point m_SheetSize;
-        
+    public abstract class Sprite : DrawableGameComponent
+    {               
         protected const int m_DefaultMillisecondsPerFrame = 16;
-        /// <summary>
-        /// /////////////
-        /// </summary>
+        
+        //kich thuoc man hinh
         protected int m_iHeightScreen;
         protected int m_iWidthScreen;
 
-        protected Vector2 m_Position;
-        
-        protected Rectangle m_rectBounding;
+        //kich thuoc cua 1 tile (frame)
+        protected int m_iTileWidth;
+        protected int m_iTileHeight;
 
-        protected Vector2 m_Speed;
+        protected Vector2 m_Position;       //vi tri cua sprite        
+        protected Rectangle m_rectBounding; //rect cua sprite
+        protected Vector2 m_Speed;          //toc do di chuyen cua sprite
 
         protected int m_iCurrIndex;
         protected int m_iTotalFrame;
 
         protected bool m_bIsCollision;
 
-        protected Texture2D[] m_arrFrame;
+        protected Texture2D m_Texture;
                 
         //frame rate
         protected int m_iTimeSinceLastFrame = 0;
@@ -43,30 +39,33 @@ namespace BattleShip.Core.Sprites
         protected int m_iLevel;
         protected string m_strName;
 
-        public Texture2D[] ArrFrame
+        protected SpriteBatch m_SpriteBatch;
+
+        public Texture2D ArrFrame
         {
             set
             {
-                this.m_arrFrame = value;
-                this.m_iCurrIndex = 0;
-                this.m_iTotalFrame = this.m_arrFrame.Length;
-                this.m_rectBounding.Width = this.m_arrFrame[0].Width;
-                this.m_rectBounding.Height = this.m_arrFrame[0].Height;
+                this.m_Texture = value;                
             }
         }
         
         public string Name
         {
-            get { return this.m_strName; }
-            set { this.m_strName = value; }
+            get { return this.m_strName; }            
         }
 
         public Rectangle BoundingRect
         {
-            get { return this.m_rectBounding; }
-            set { this.m_rectBounding = value; }
+            get { return this.m_rectBounding; }            
         }
-        public Sprite()
+
+        public void SetPosition(Vector2 pos)
+        {
+            this.m_Position = pos;
+        }
+        
+        public Sprite(Game game)
+            : base(game)
         {
             this.m_iHeightScreen = 0;
             this.m_iWidthScreen = 0;
@@ -74,6 +73,7 @@ namespace BattleShip.Core.Sprites
             this.m_iTotalFrame = 0;
             this.m_rectBounding = new Rectangle();
             this.m_bIsCollision = false;
+            this.m_Speed = new Vector2(10, 10);
         }
 
         public bool CheckCollision(Sprite[] arrSprite)
@@ -107,36 +107,30 @@ namespace BattleShip.Core.Sprites
                 return false;
             }
         }
+                
+        public override void Update(GameTime gameTime)
+        {            
+            base.Update(gameTime);
+        }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime)
         {
             if (this.m_bIsCollision)
             {
-                spriteBatch.Draw(this.m_arrFrame[this.m_iCurrIndex], this.m_Position, Color.Red);
+                m_SpriteBatch.Draw(this.m_Texture, this.m_Position, new Rectangle(0,0,this.m_iTileWidth, this.m_iTileHeight), Color.Red);
             }
             else
             {
-                spriteBatch.Draw(this.m_arrFrame[this.m_iCurrIndex], this.m_Position, Color.White);
+                m_SpriteBatch.Draw(this.m_Texture, this.m_Position, new Rectangle(0, 0, this.m_iTileWidth, this.m_iTileHeight), Color.Red);
             }
+
+            base.Draw(gameTime);
         }
-
-        public void Update(GameTime gameTime)
-        {
-            this.m_iTimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.m_iTimeSinceLastFrame > this.m_iMillisecondsPerFrame)
-            {
-                this.m_iTimeSinceLastFrame -= this.m_iMillisecondsPerFrame;
-
-                Go();
-                                
-                this.m_rectBounding.X = (int)this.m_Position.X;
-                this.m_rectBounding.Y = (int)this.m_Position.Y;
-
-                this.m_iCurrIndex = (this.m_iCurrIndex + 1) % this.m_iTotalFrame;
-            }
-        }
-
-        abstract public void Go();
+               
+        abstract public void TurnLeft();
+        abstract public void TurnRight();
+        abstract public void GoUp();
+        abstract public void GoDown();
         public abstract Sprite Clone();                  
     }
 }
