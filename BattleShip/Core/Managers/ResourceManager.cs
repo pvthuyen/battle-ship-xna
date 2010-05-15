@@ -21,6 +21,8 @@ namespace BattleShip.Core.Managers
 
         public Texture2D imgButton;
 
+        public Texture2D imgGameScreen;
+
         //sprite fonts
         public SpriteFont smallFont;
         public SpriteFont largeFont;
@@ -40,13 +42,15 @@ namespace BattleShip.Core.Managers
 
             imgButton = this.m_contentManager.Load<Texture2D>(@"Resource/Menu/Button");
 
+            imgGameScreen = this.m_contentManager.Load<Texture2D>(@"Resource/Background/gamescreen");
+
             smallFont = this.m_contentManager.Load<SpriteFont>(@"Font/Arial");
             largeFont = this.m_contentManager.Load<SpriteFont>(@"Font/Arial");
         }
 
         internal Texture2D LoadTexture(string sFileName)
         {
-            throw new NotImplementedException();
+            return this.m_contentManager.Load<Texture2D>(sFileName);
         }
     }
 }

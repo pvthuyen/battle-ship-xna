@@ -117,7 +117,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resource\Background\" />
+    <Compile Include="Resource\Background\fulltileset_alpha.png">
+      <Name>fulltileset_alpha</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resource\Background\gamescreen.png">
+      <Name>gamescreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resource\Background\editorimages.png">
+      <Name>editorimages</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Resource\Sound\" />
     <Folder Include="Resource\Sprite\Player\" />
   </ItemGroup>

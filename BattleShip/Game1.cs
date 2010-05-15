@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using BattleShip.Core.Scences;
 using BattleShip.Core.Managers;
+using BattleShip.Core.GameComponents;
 
 namespace BattleShip
 {
@@ -32,6 +33,8 @@ namespace BattleShip
         ActionScence m_ActionScence;
 
         InputManager m_InputManager;
+
+       
 
         public Game1()
         {
@@ -62,7 +65,7 @@ namespace BattleShip
             spriteBatch = new SpriteBatch(GraphicsDevice);
             this.Services.AddService(typeof(SpriteBatch), spriteBatch);
             // TODO: use this.Content to load your game content here
-
+            
             //load all sounds
             m_SoundManager = new SoundManager();
             m_SoundManager.LoadContent(this.Content);
@@ -71,9 +74,10 @@ namespace BattleShip
             //load all resource
             m_ResourceManager = new ResourceManager(this.Content);
             m_ResourceManager.LoadAllResource();
-            
-            m_InputManager = new InputManager();
+            this.Services.AddService(typeof(ResourceManager), m_ResourceManager);
 
+            m_InputManager = new InputManager();
+            
             //load scences
             m_HelpScence = new HelpScence(this, m_ResourceManager.imgBackgroundHelpScence, m_ResourceManager.imgForegroundHelpScence);                        
             m_StartScence = new StartScence(this, m_ResourceManager.smallFont, m_ResourceManager.largeFont, m_ResourceManager.imgBackgroundStartScence, m_ResourceManager.imgForegroundStartScence, m_ResourceManager.imgButton);
@@ -85,7 +89,7 @@ namespace BattleShip
 
             //begin at start scence
             m_StartScence.ShowScreen();
-            this.m_ActiveScence = m_StartScence;
+            this.m_ActiveScence = m_StartScence;            
         }
 
         /// <summary>
@@ -109,6 +113,7 @@ namespace BattleShip
                 this.Exit();
 
             // TODO: Add your update logic here
+                        
             HandleScenceInput();
             base.Update(gameTime);
         }
@@ -160,7 +165,12 @@ namespace BattleShip
             switch (m_StartScence.MainMenu.SelectedMenuItem)
             {
                 case BattleShip.Core.GameComponents.TextMenuComponent.GameMenuItem.StartGame:
+                    m_ActionScence.GameMode = ActionScence.PlayMode.Play;
                     ShowScence(m_ActionScence);                    
+                    break;
+                case BattleShip.Core.GameComponents.TextMenuComponent.GameMenuItem.EditMap:
+                    m_ActionScence.GameMode = ActionScence.PlayMode.Edit;
+                    ShowScence(m_ActionScence);
                     break;
                 case BattleShip.Core.GameComponents.TextMenuComponent.GameMenuItem.Option:                    
                     break;

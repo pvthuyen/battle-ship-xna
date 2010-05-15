@@ -39,11 +39,11 @@ namespace BattleShip.Core.Scences
             if (!this.m_MainMenu.Visible)
             {
                 Rectangle clientBounds = Game.Window.ClientBounds;
-                if (this.m_ShipPosition.X >= (clientBounds.Width - 595) / 2)
+                if (this.m_ShipPosition.X >= (clientBounds.Width) / 2)
                 {
                     this.m_ShipPosition.X -= 15;
                 }
-                if (m_BattlePosition.X <= (clientBounds.Width - 715) / 2)
+                if (m_BattlePosition.X <= (clientBounds.Width - 500) / 2)
                 {
                     m_BattlePosition.X += 15;
                 }
@@ -54,7 +54,7 @@ namespace BattleShip.Core.Scences
 
                     //m_SoundManager.StartMusic
                     
-                    m_flashEnhancePosition = new Vector2((m_ShipPosition.X + m_ShipRect.Width - m_flashEnhanceRect.Width / 2) - 80, m_ShipPosition.Y);
+                    m_flashEnhancePosition = new Vector2((m_ShipPosition.X + m_ShipRect.Width - m_flashEnhanceRect.Width / 2) - 80, m_ShipPosition.Y + m_ShipRect.Height + 10);
 
                     m_bShowEnhanced = true;
                 }
@@ -91,7 +91,7 @@ namespace BattleShip.Core.Scences
             m_BattlePosition.Y = 40;
 
             m_ShipPosition.X = Game.Window.ClientBounds.Width;
-            m_ShipPosition.Y = 180;
+            m_ShipPosition.Y = m_BattleRect.Height;
 
             this.m_MainMenu.MenuPosition = new Vector2((Game.Window.ClientBounds.Width - m_MainMenu.WidthMenu) / 2, 330);
             this.m_MainMenu.Visible = false;
@@ -115,8 +115,8 @@ namespace BattleShip.Core.Scences
             this.m_lstGameComponent.Add(new ImageComponent(game, background, ImageComponent.DrawMode.Center));
 
             m_BattleRect = new Rectangle(0, 0, 394, 96);
-            m_ShipRect = new Rectangle(95, 208, 186, 65);
-            m_flashEnhanceRect = new Rectangle(154, 70, 100, 45);
+            m_ShipRect = new Rectangle(208, 97, 186, 65);
+            m_flashEnhanceRect = new Rectangle(70, 154, 100, 45);
             m_ElapsedTime = TimeSpan.Zero;
 
             //load main menu from xml

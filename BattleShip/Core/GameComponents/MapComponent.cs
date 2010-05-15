@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using BattleShip.Core.Managers;
+using System.Xml;
 
 
 namespace BattleShip.Core.GameComponents
@@ -40,117 +41,129 @@ namespace BattleShip.Core.GameComponents
             public int m_iFrameRate;
         }
 
-        private List<TileSet> m_TileSets = new List<TileSet>();
-        private List<TileAnimation> m_taAnimations = new List<TileAnimation>();
+        private List<TileSet> m_TileSets = new List<TileSet>();                 //list cac tile set
+        private List<TileAnimation> m_taAnimations = new List<TileAnimation>(); //list cac tile animation trong tile set
 
-        private int m_iTileWidth;
+        //kich thuoc cua 1 tile
+        private int m_iTileWidth;   
         private int m_iTileHeight;
 
-        private int m_iTileSetCount;
+        //so luong tile trong tile set
+        //private int m_iTileSetCount;
 
+        //kich thuoc cua map hien thi
         private int m_iMapWidth;
         private int m_iMapHeight;
 
-        private int[,] m_iMap;
-        private int[,] m_iMapTrans;
-        private int[,] m_iMapObj;
-        private int[,] m_iMapData;
+        //du lieu cua map
+        private int[,] m_iMap;          //du lieu map o tang background
+        private int[,] m_iMapTrans;     //du lieu map o tang transition
+        private int[,] m_iMapObj;       //du lieu map o tang obj
+        private int[,] m_iMapData;      //khu vuc di chuyen cua map
 
+        //vi tri goc trai tren cung duoc hien thi cua map
         private int m_iMapX;
         private int m_iMapY;
         private int m_iMapSubX;
         private int m_iMapSubY;
 
-        private int m_iScreenHeight;
-        private int m_iScreenWidth;
-        private int m_iScreenX;
-        private int m_iScreenY;
+        //kich thuoc hien thi man hinh
+        private int m_iScreenHeight;    //so luong tile theo chieu rong
+        private int m_iScreenWidth;     //so luong tile theo chieu ngang
+        private int m_iScreenX;         //vi tri x o goc trai tren
+        private int m_iScreenY;         //vi tri y o goc trai tren
 
         private bool m_bDrawBase = true;
         private bool m_bDrawTrans = true;
         private bool m_bDrawObj = true;
         private bool m_bDrawFirstRowTiles = true;
 
+        private int m_iXLoc;
+        private int m_iYLoc;
+        private int m_iTileToDraw;
+
         private SpriteBatch m_spriteBatch;
         private ResourceManager m_resourceManager;
 
         public int Left
         {
-            // The Left property determines the left pixel position of the
-            // tile engine drawing area on the display.
             get { return this.m_iScreenX; }
             set { this.m_iScreenX = value; }
         }
 
         public int Top
         {
-            // The Top property determines the top pixel position of the
-            // tile engine drawing area on the display.
             get { return this.m_iScreenY; }
             set { this.m_iScreenY = value; }
         }
 
+        /// <summary>
+        /// so luong tile theo chieu rong cua map
+        /// </summary>
         public int Width
-        {
-            // The Width property determines how many tiles wide will be
-            // drawn by the tile engine.  Note that this property is in TILES
-            // and not in PIXELS
+        {            
             get { return this.m_iScreenWidth; }
             set { this.m_iScreenWidth = value; }
         }
 
+        /// <summary>
+        /// so luong tile theo chieu cao cua map
+        /// </summary>
         public int Height
         {
-            // the Height property determines how many tiles high will be
-            // drawn by the tile engine.  Note that this property is in TILES
-            // and not in PIXELS
             get { return this.m_iScreenHeight; }
             set { this.m_iScreenHeight = value; }
         }
 
+        /// <summary>
+        /// kich thuoc chieu rong cua 1 tile tinh bang pixel
+        /// </summary>
         public int TileWidth
-        {
-            // Determines the width of an individual tile in pixels.
+        {            
             get { return this.m_iTileWidth; }
             set { this.m_iTileWidth = value; }
         }
 
+        /// <summary>
+        /// kich thuoc chieu cao cua 1 tile tinh bang pixel
+        /// </summary>
         public int TileHeight
-        {
-            // Determines the height of an individual tile in pixels.
+        {            
             get { return this.m_iTileHeight; }
             set { this.m_iTileHeight = value; }
         }
 
+        /// <summary>
+        /// vi tri hien thi cua map theo x
+        /// </summary>
         public int MapX
         {
-            // Determines the X map coordinate.  X=0 is the left-most tile on
-            // the map.  The X coordinate represents the X value of the left-most
-            // displayed map tile.
             get { return this.m_iMapX; }
             set { this.m_iMapX = value; }
         }
 
+        /// <summary>
+        /// vi tri hien thi cua map theo y
+        /// </summary>
         public int MapY
         {
-            // Determines the Y map coordinate.  Y=0 is the top-most tile on
-            // the map.  The Y coordinate represents the Y value of the left-most
-            // displayed map tile.
             get { return this.m_iMapY; }
             set { this.m_iMapY = value; }
         }
 
+        /// <summary>
+        /// kich thuot hien thi theo chieu ngang
+        /// </summary>
         public int MapWidth
         {
-            // The MapWidth property is read-only since it is determined
-            // by the map that is loaded.
             get { return this.m_iMapWidth; }
         }
 
+        /// <summary>
+        /// kich thuoc hien thi theo chieu cao
+        /// </summary>
         public int MapHeight
         {
-            // The MapHeight property is read-only since it is determined
-            // by the map that is loaded.
             get { return this.m_iMapHeight; }
         }
 
@@ -178,60 +191,110 @@ namespace BattleShip.Core.GameComponents
             set { this.m_bDrawFirstRowTiles = value; }
         }
 
+        /// <summary>
+        /// load du lieu map tu file xml
+        /// </summary>
+        /// <param name="strXmlFile">file du lieu</param>
+        /// <param name="iLevel">vong choi</param>
         public void LoadMap(string strXmlFile, int iLevel)
         {
+            XmlDocument mapXml = new XmlDocument();
+            mapXml.Load(strXmlFile);
 
+            //read data
+            XmlNodeList nodeList = mapXml.GetElementsByTagName("Data");
+            string data = string.Empty;
+            foreach (XmlNode node in nodeList)
+            {
+                this.m_iMapWidth = int.Parse(node.Attributes["MapWidth"].Value);
+                this.m_iMapHeight = int.Parse(node.Attributes["MapHeight"].Value);
+                data = node.InnerText;
+            }
+
+            m_iMapData = new int[this.m_iMapWidth, this.m_iMapHeight];
+            m_iMapObj = new int[this.m_iMapWidth, this.m_iMapHeight];
+            m_iMapTrans = new int[this.m_iMapWidth, this.m_iMapHeight];
+            m_iMap = new int[this.m_iMapWidth, this.m_iMapHeight];
+
+            int i, j;
+            string[] arrValue = data.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            int index = 0;
+            for (i = 0; i < this.m_iMapHeight; i++)
+            {
+                for (j = 0; j < this.m_iMapWidth; j++)
+                {
+                    m_iMap[i, j] = int.Parse(arrValue[index++]);                    
+                    m_iMapTrans[i, j] = int.Parse(arrValue[index++]);
+                    m_iMapObj[i, j] = int.Parse(arrValue[index++]);
+                    m_iMapData[i, j] = int.Parse(arrValue[index++]);
+                }
+            }
+
+            //read tile set
+            nodeList = mapXml.GetElementsByTagName("TileSet");
+            foreach (XmlNode node in nodeList)
+            {
+                TileSet tileSet = new TileSet();
+                tileSet.m_strFileName = node.Attributes["FileName"].Value;
+                tileSet.m_t2dTexture = m_resourceManager.LoadTexture(@"Resource/Background/" + tileSet.m_strFileName);
+                tileSet.m_iTileWidth = int.Parse(node.Attributes["TileWidth"].Value);
+                tileSet.m_iTileHeight = int.Parse(node.Attributes["TileHeight"].Value);
+                tileSet.m_iVerticalSpacing = int.Parse(node.Attributes["VerticalSpacing"].Value);
+                tileSet.m_iHorizontalSpacing = int.Parse(node.Attributes["HorizontalSpacing"].Value);
+                tileSet.m_iTilesPerRow = tileSet.m_t2dTexture.Width /
+                                         (tileSet.m_iTileWidth + tileSet.m_iHorizontalSpacing);
+
+                this.m_iTileHeight = tileSet.m_iTileHeight;
+                this.m_iTileWidth = tileSet.m_iTileWidth;
+   
+                this.m_TileSets.Add(tileSet);
+            }
+
+            
+
+            nodeList = mapXml.GetElementsByTagName("TileAnimation");
+            foreach (XmlNode node in nodeList)
+            {
+                TileAnimation ta = new TileAnimation();
+                ta.m_iCurrentFrame = 0;
+                ta.m_iStartFrame = int.Parse(node.Attributes["StartFrame"].Value);
+                ta.m_iFrameCount = int.Parse(node.Attributes["FrameCount"].Value);
+                ta.m_iFrameRate = int.Parse(node.Attributes["FrameRate"].Value);
+
+                this.m_taAnimations.Add(ta);
+            }                        
         }
 
+        /// <summary>
+        /// luu map vao file xml
+        /// </summary>
         public void SaveMap()
         {
 
         }
-
-        public void AddTileset(string sFileName, int iTileWidth, int iTileHeight, int iHorizontalSpacing, int iVerticalSpacing)
-        {
-            // Load a new tileset from a file and add it to the tileset list.
-            // Each tileset *must* be the same size, and all tiles must be the
-            // same size.  
-            /*
-            TileSet NewTileSet = new TileSet();
-            try
-            {
-                NewTileSet.t2dTexture = this.m_resourceManager.Load(sFileName);
-
-                NewTileSet.m_strFileName = sFileName;
-                NewTileSet.m_iTileWidth = iTileWidth;
-                NewTileSet.m_iTileHeight = iTileHeight;
-                NewTileSet.m_iHorizontalSpacing = iHorizontalSpacing;
-                NewTileSet.m_iVerticalSpacing = iVerticalSpacing;
-                NewTileSet.m_iTilesPerRow = NewTileSet.m_t2dTexture.Width /
-                                         (NewTileSet.m_iTileWidth + NewTileSet.m_iHorizontalSpacing);
-                
-                m_TileSets.Add(NewTileSet);
-                m_iTileSetCount++;
-            }
-            catch
-            {
-                throw;
-            }*/
-        }
-
+               
+        /// <summary>
+        /// set vi tri ban dau cua map
+        /// </summary>
+        /// <param name="x">x bat dau hien thi</param>
+        /// <param name="y">y bat dau hien thi</param>
+        /// <param name="subx">vi tri ben trong cua 1 o</param>
+        /// <param name="suby">vi tri ben trong cua 1 o</param>
         public void SetMapLocation(int x, int y, int subx, int suby)
         {
-            // Sets the current map location, providing the X,Y coordintate
-            // as well as the Sub-Tile X and Y positions.
             m_iMapX = x;
             m_iMapY = y;
             m_iMapSubX = subx;
             m_iMapSubY = suby;
         }
 
+        /// <summary>
+        /// scroll map
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void ScrollByPixels(int x, int y)
         {
-            // Move the map by X pixels horizontally and Y pixels vertically.
-            // Accounts for moving off of a tile and onto another as well as
-            // moving off of the end of the map by looping around to the other
-            // side.
             m_iMapSubX += x;
             m_iMapSubY += y;
             while (m_iMapSubX >= m_iTileWidth)
@@ -307,25 +370,16 @@ namespace BattleShip.Core.GameComponents
             return m_iMapData[y, x];
         }
 
-        public void AddTileAnimation(int iStartFrame, int iFrameCount, int iFrameRate)
-        {
-            // Define a new tileset animation.  Tiles in an animation must
-            // be consecutive and must all reside on the same tileset.
-            TileAnimation thisAnimation = new TileAnimation();
-
-            thisAnimation.m_iStartFrame = iStartFrame;
-            thisAnimation.m_iFrameCount = iFrameCount;
-            thisAnimation.m_iFrameRate = iFrameRate;
-            thisAnimation.m_iCurrentFrame = 0;
-
-            m_taAnimations.Add(thisAnimation);
-        }
-
+        /// <summary>
+        /// kiem tra 1 tile co phai la trong day animation hay khong
+        /// </summary>
+        /// <param name="iTile"></param>
+        /// <returns></returns>
         private bool IsAnimatedTile(int iTile)
         {
             foreach (TileAnimation thisAnimation in m_taAnimations)
             {
-                if (thisAnimation.m_iStartFrame == iTile)
+                if (thisAnimation.m_iStartFrame <= iTile && thisAnimation.m_iStartFrame + thisAnimation.m_iFrameCount <= iTile)
                 {
                     return true;
                 }
@@ -345,6 +399,9 @@ namespace BattleShip.Core.GameComponents
             return 0;
         }
 
+        /// <summary>
+        /// hien thi animation cho tile
+        /// </summary>
         private void UpdateAnimationFrames()
         {
             for (int x = 0; x < m_taAnimations.Count; x++)
@@ -381,6 +438,8 @@ namespace BattleShip.Core.GameComponents
             : base(game)
         {
             // TODO: Construct any child components here
+            m_resourceManager = game.Services.GetService(typeof(ResourceManager)) as ResourceManager;
+            m_spriteBatch = game.Services.GetService(typeof(SpriteBatch)) as SpriteBatch;
             
         }
 
@@ -395,7 +454,7 @@ namespace BattleShip.Core.GameComponents
             this.Visible = false;
 
             // Set the tileset count to 0
-            m_iTileSetCount = 0;
+            //m_iTileSetCount = 0;
 
             this.m_resourceManager = new ResourceManager(Game.Content);
             this.m_spriteBatch = Game.Services.GetService(typeof(SpriteBatch)) as SpriteBatch;
@@ -405,7 +464,140 @@ namespace BattleShip.Core.GameComponents
 
         public override void Draw(GameTime gameTime)
         {
+            m_spriteBatch.End();
+            m_spriteBatch.Begin(SpriteBlendMode.None);
+            
+            // Draw the base layer of the map
+            if (m_bDrawBase)
+            {
+                for (int y = 0; y < m_iScreenHeight; y++)
+                {
+                    for (int x = 0; x < m_iScreenWidth; x++)
+                    {                        
+                        m_iXLoc = x + m_iMapX;
+                        m_iYLoc = y + m_iMapY;
 
+                        // Account for map wrap-arounds
+                        if (m_iXLoc >= m_iMapHeight)
+                        {
+                            m_iXLoc -= m_iMapWidth;
+                        }
+
+                        if (m_iXLoc < 0)
+                        {
+                            m_iXLoc += m_iMapWidth;
+                        }
+
+                        if (m_iYLoc >= m_iMapHeight)
+                        {
+                            m_iYLoc -= m_iMapHeight;
+                        }
+
+                        if (m_iYLoc < 0)
+                        {
+                            m_iYLoc += m_iMapHeight;
+                        }
+
+                        m_iTileToDraw = m_iMap[m_iYLoc, m_iXLoc];
+
+                        if (IsAnimatedTile(m_iTileToDraw))
+                        {
+                            m_iTileToDraw = GetAnimatedFrame(m_iTileToDraw);
+                        }
+
+                        if (m_iTileToDraw >= 0)
+                        // Only draw tiles > 0 since TileStudio uses -1
+                        // to indicate an empty tile.
+                        {
+                            // Draw the tile.  We divide the tile number by 10000 to
+                            // determine what tileset the tile is on (0-9999=tileset 0,
+                            // 10000-19999=Tileset 2, etc)
+                            m_spriteBatch.Draw(m_TileSets[(m_iTileToDraw / 10000)].m_t2dTexture,
+                                             new Rectangle(((x * m_iTileWidth) + m_iScreenX) - m_iMapSubX,
+                                             ((y * m_iTileHeight) + m_iScreenY) - m_iMapSubY,
+                                             m_TileSets[(m_iTileToDraw / 10000)].m_iTileWidth,
+                                             m_TileSets[(m_iTileToDraw / 10000)].m_iTileHeight),
+                                             GetTileRectangle(m_iTileToDraw),
+                                             Color.White);
+                        }
+                    }
+                }
+            }
+            m_spriteBatch.End();
+
+            m_spriteBatch.Begin(SpriteBlendMode.AlphaBlend);
+
+            // Draw transitions and Objects layers of the map
+            for (int y = 0; y < m_iScreenHeight; y++)
+            {
+                for (int x = 0; x < m_iScreenWidth; x++)
+                {
+                    Rectangle recDest = new Rectangle(((x * m_iTileWidth) + m_iScreenX) - m_iMapSubX,
+                                         ((y * m_iTileHeight) + m_iScreenY) - m_iMapSubY,
+                                         m_TileSets[m_iTileToDraw / 10000].m_iTileWidth,
+                                         m_TileSets[m_iTileToDraw / 10000].m_iTileHeight);
+
+                    m_iXLoc = x + m_iMapX;
+                    m_iYLoc = y + m_iMapY;
+                    if (m_iXLoc >= m_iMapHeight)
+                    {
+                        m_iXLoc -= m_iMapWidth;
+                    }
+
+                    if (m_iXLoc < 0)
+                    {
+                        m_iXLoc += m_iMapWidth;
+                    }
+
+                    if (m_iYLoc >= m_iMapHeight)
+                    {
+                        m_iYLoc -= m_iMapHeight;
+                    }
+
+                    if (m_iYLoc < 0)
+                    {
+                        m_iYLoc += m_iMapHeight;
+                    }
+
+                    if (m_bDrawTrans)
+                    {
+                        m_iTileToDraw = m_iMapTrans[m_iYLoc, m_iXLoc];
+
+                        if (IsAnimatedTile(m_iTileToDraw))
+                        {
+                            m_iTileToDraw = GetAnimatedFrame(m_iTileToDraw);
+                        }
+
+                        if (m_iTileToDraw >= 0 && ((m_iTileToDraw >
+                            m_TileSets[m_iTileToDraw / 10000].m_iTilesPerRow) || m_bDrawFirstRowTiles))
+                        {
+                            m_spriteBatch.Draw(m_TileSets[m_iTileToDraw / 10000].m_t2dTexture,
+                                               recDest, GetTileRectangle(m_iTileToDraw),
+                                               Color.White);
+                        }
+                    }
+
+                    if (m_bDrawObj)
+                    {
+                        m_iTileToDraw = m_iMapObj[m_iYLoc, m_iXLoc];
+
+                        if (IsAnimatedTile(m_iTileToDraw))
+                        {
+                            m_iTileToDraw = GetAnimatedFrame(m_iTileToDraw);
+                        }
+
+                        if (m_iTileToDraw >= 0 && ((m_iTileToDraw >
+                            m_TileSets[m_iTileToDraw / 1000].m_iTilesPerRow) || m_bDrawFirstRowTiles))
+                        {
+                            m_spriteBatch.Draw(m_TileSets[m_iTileToDraw / 10000].m_t2dTexture,
+                                recDest, GetTileRectangle(m_iTileToDraw),
+                                Color.White);
+                        }
+                    }
+                }
+            }
+            
+            //m_spriteBatch.End();
             base.Draw(gameTime);
         }
 
@@ -416,7 +608,7 @@ namespace BattleShip.Core.GameComponents
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update code here
-
+            UpdateAnimationFrames();
             base.Update(gameTime);
         }
          

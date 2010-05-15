@@ -210,6 +210,9 @@ namespace BattleShip.Core.GameComponents
                     case "Start Game":
                         m_SelectedMenuItem = GameMenuItem.StartGame;
                         break;
+                    case "Edit Map":
+                        m_SelectedMenuItem = GameMenuItem.EditMap;
+                        break;
                     case "Option":
                         m_SelectedMenuItem = GameMenuItem.Option;
                         break;
@@ -285,6 +288,7 @@ namespace BattleShip.Core.GameComponents
         public enum GameMenuItem
         {
             StartGame,
+            EditMap,
             Option,
             Help,
             Exit,

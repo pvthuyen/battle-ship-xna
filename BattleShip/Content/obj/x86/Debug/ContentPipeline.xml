@@ -100,6 +100,33 @@
       <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\Button.xnb</Output>
       <Time>2010-05-12T00:21:22+07:00</Time>
     </Item>
+    <Item>
+      <Source>Resource\Background\fulltileset_alpha.png</Source>
+      <Name>Resource\Background\fulltileset_alpha</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Background\fulltileset_alpha.xnb</Output>
+      <Time>2010-05-12T01:55:30+07:00</Time>
+    </Item>
+    <Item>
+      <Source>Resource\Background\gamescreen.png</Source>
+      <Name>Resource\Background\gamescreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Background\gamescreen.xnb</Output>
+      <Time>2010-05-12T12:01:36+07:00</Time>
+    </Item>
+    <Item>
+      <Source>Resource\Background\editorimages.png</Source>
+      <Name>Resource\Background\editorimages</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Background\editorimages.xnb</Output>
+      <Time>2010-05-12T12:21:08+07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
