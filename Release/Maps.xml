@@ -1,5 +1,5 @@
 <Map level="1">
-	<TileSet FileName="fulltileset_alpha.jpg" TileWidth="48" TileHeight="48" VerticalSpacing="0" HorizontalSpacing="0">
+	<TileSet FileName="fulltileset_alpha" TileWidth="48" TileHeight="48" VerticalSpacing="0" HorizontalSpacing="0">
 		<TileAnimation StartFrame="0" FrameCount="10" FrameRate="4">
 		</TileAnimation>
 	</TileSet>
@@ -1605,4 +1605,4 @@
 0
 0
 	</Data>
-</Map>
+</Map>Map>

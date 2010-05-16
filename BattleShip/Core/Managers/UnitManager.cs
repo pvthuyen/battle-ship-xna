@@ -26,23 +26,23 @@ namespace BattleShip.Core.Managers
         }
         public Sprite ProduceUnit(string strUnitName)
         {
-            for(int i=0;i<this.m_nSampleUnit;i++)
+            /*for(int i=0;i<this.m_nSampleUnit;i++)
             {
                 if (this.m_SampleUnit[i].Name.Equals(strUnitName))
                 {
                     return ProduceUnit(i);
                 }
-            }
+            }*/
             return null;
         }
 
         public Sprite ProduceUnit(int i)
         {
-            if (i >= 0 && i < this.m_nSampleUnit)
+            /*if (i >= 0 && i < this.m_nSampleUnit)
             {
                 return this.m_SampleUnit[i].Clone();
             }
-            else
+            else*/
                 return null;
         }
     }

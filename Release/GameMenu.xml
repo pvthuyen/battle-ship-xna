@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?> 
 <MenuItem>
 	<Item name="Start Game"/>
+	<Item name="Edit Map"/>
 	<Item name="Option">
 		<Item name="Sound">
 			<Item name="On"/>

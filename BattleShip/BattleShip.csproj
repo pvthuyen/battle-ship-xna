@@ -101,8 +101,9 @@
     <Compile Include="Core\Scences\GameScence.cs" />
     <Compile Include="Core\Scences\HelpScence.cs" />
     <Compile Include="Core\Scences\StartScence.cs" />
-    <Compile Include="Core\Sprites\Player.cs" />
     <Compile Include="Core\Sprites\Sprite.cs" />
+    <Compile Include="Core\Sprites\SpriteManager.cs" />
+    <Compile Include="Core\Sprites\UserControlledSprite.cs" />
     <Compile Include="Core\Utils\Utility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

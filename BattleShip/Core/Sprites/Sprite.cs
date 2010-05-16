@@ -7,130 +7,89 @@ using Microsoft.Xna.Framework;
 
 namespace BattleShip.Core.Sprites
 {
-    public abstract class Sprite : DrawableGameComponent
-    {               
-        protected const int m_DefaultMillisecondsPerFrame = 16;
-        
-        //kich thuoc man hinh
-        protected int m_iHeightScreen;
-        protected int m_iWidthScreen;
+    abstract class Sprite
+    {
+        Texture2D textureImage;
+        protected Vector2 position;
+        protected Point frameSize;
+        int collisionOffset;
+        Point currentFrame;
+        Point sheetSize;
+        int timeSinceLastFrame = 0;
+        int millisecondsPerFrame;
+        protected Vector2 speed;
+        const int defaultMillisecondsPerFrame = 16;
 
-        //kich thuoc cua 1 tile (frame)
-        protected int m_iTileWidth;
-        protected int m_iTileHeight;
+        //Audio cue name for collisions
+        public string collisionCueName { get; private set; }
 
-        protected Vector2 m_Position;       //vi tri cua sprite        
-        protected Rectangle m_rectBounding; //rect cua sprite
-        protected Vector2 m_Speed;          //toc do di chuyen cua sprite
-
-        protected int m_iCurrIndex;
-        protected int m_iTotalFrame;
-
-        protected bool m_bIsCollision;
-
-        protected Texture2D m_Texture;
-                
-        //frame rate
-        protected int m_iTimeSinceLastFrame = 0;
-        protected int m_iMillisecondsPerFrame;
-
-        protected int m_iHP;
-        protected int m_iDefence;
-        protected int m_iLevel;
-        protected string m_strName;
-
-        protected SpriteBatch m_SpriteBatch;
-
-        public Texture2D ArrFrame
+        public abstract Vector2 direction
         {
-            set
+            get;
+        }
+
+        public Rectangle collisionRect
+        {
+            get
             {
-                this.m_Texture = value;                
+                return new Rectangle(
+                    (int)position.X + collisionOffset,
+                    (int)position.Y + collisionOffset,
+                    frameSize.X - (collisionOffset * 2),
+                    frameSize.Y - (collisionOffset * 2));
             }
         }
-        
-        public string Name
+
+        public Sprite(Texture2D textureImage, Vector2 position, Point frameSize,
+            int collisionOffset, Point currentFrame, Point sheetSize, Vector2 speed,
+            string collisionCueName)
+            : this(textureImage, position, frameSize, collisionOffset, currentFrame,
+            sheetSize, speed, defaultMillisecondsPerFrame, collisionCueName)
         {
-            get { return this.m_strName; }            
+        }
+        public Sprite(Texture2D textureImage, Vector2 position, Point frameSize,
+            int collisionOffset, Point currentFrame, Point sheetSize, Vector2 speed,
+            int millisecondsPerFrame, string collisionCueName)
+        {
+            this.textureImage = textureImage;
+            this.position = position;
+            this.frameSize = frameSize;
+            this.collisionOffset = collisionOffset;
+            this.currentFrame = currentFrame;
+            this.sheetSize = sheetSize;
+            this.speed = speed;
+            this.collisionCueName = collisionCueName;
+            this.millisecondsPerFrame = millisecondsPerFrame;
         }
 
-        public Rectangle BoundingRect
+        public virtual void Update(GameTime gameTime, Rectangle clientBounds)
         {
-            get { return this.m_rectBounding; }            
-        }
-
-        public void SetPosition(Vector2 pos)
-        {
-            this.m_Position = pos;
-        }
-        
-        public Sprite(Game game)
-            : base(game)
-        {
-            this.m_iHeightScreen = 0;
-            this.m_iWidthScreen = 0;
-            this.m_iCurrIndex = 0;
-            this.m_iTotalFrame = 0;
-            this.m_rectBounding = new Rectangle();
-            this.m_bIsCollision = false;
-            this.m_Speed = new Vector2(10, 10);
-        }
-
-        public bool CheckCollision(Sprite[] arrSprite)
-        {
-            int i;
-            for (i = 0; i < arrSprite.Length; i++)
+            //Update animation frame
+            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+            if (timeSinceLastFrame > millisecondsPerFrame)
             {
-                if (this.CheckCollision(arrSprite[i]))
+                timeSinceLastFrame = 0;
+                ++currentFrame.X;
+                if (currentFrame.X >= sheetSize.X)
                 {
-                    this.m_bIsCollision = true;
-                    arrSprite[i].m_bIsCollision = true;
-                    return true;
+                    currentFrame.X = 0;
+                    ++currentFrame.Y;
+                    if (currentFrame.Y >= sheetSize.Y)
+                        currentFrame.Y = 0;
                 }
             }
-
-            this.m_bIsCollision = false;
-            return false;
         }
 
-        public bool CheckCollision(Sprite sprite)
+        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.m_bIsCollision = this.m_rectBounding.Intersects(sprite.BoundingRect);
-            if (this.m_bIsCollision)
-            {
-                sprite.m_bIsCollision = true;
-                return true;
-            }
-            else
-            {
-                sprite.m_bIsCollision = false;
-                return false;
-            }
+            //Draw the sprite
+            spriteBatch.Draw(textureImage,
+                position,
+                new Rectangle(currentFrame.X * frameSize.X,
+                    currentFrame.Y * frameSize.Y,
+                    frameSize.X, frameSize.Y),
+                Color.White, 0, Vector2.Zero,
+                1f, SpriteEffects.None, 0);
         }
-                
-        public override void Update(GameTime gameTime)
-        {            
-            base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            if (this.m_bIsCollision)
-            {
-                m_SpriteBatch.Draw(this.m_Texture, this.m_Position, new Rectangle(0,0,this.m_iTileWidth, this.m_iTileHeight), Color.Red);
-            }
-            else
-            {
-                m_SpriteBatch.Draw(this.m_Texture, this.m_Position, new Rectangle(0, 0, this.m_iTileWidth, this.m_iTileHeight), Color.Red);
-            }
-
-            base.Draw(gameTime);
-        }
-               
-        abstract public void TurnLeft();
-        abstract public void TurnRight();
-        abstract public void GoUp();
-        abstract public void GoDown();
-        public abstract Sprite Clone();                  
     }
 }

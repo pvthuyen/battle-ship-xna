@@ -13,6 +13,7 @@ namespace BattleShip.Core.Scences
 {
     class ActionScence : GameScence
     {
+        private BattleShip.Core.Sprites.SpriteManager spriteManager;
         private MapComponent m_MapComponent;
         private ImageComponent m_GameScreen;
 
@@ -22,7 +23,7 @@ namespace BattleShip.Core.Scences
         private ResourceManager m_ResourceManager;
         private InputManager m_InputManager;
 
-        private Player m_Player;
+        //private Player m_Player;
 
         private PlayMode m_GameMode;
         public PlayMode GameMode
@@ -42,7 +43,7 @@ namespace BattleShip.Core.Scences
                 default:
                     break;
             }
-
+            spriteManager.Draw(gameTime);
             base.Draw(gameTime);
         }
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
@@ -57,7 +58,8 @@ namespace BattleShip.Core.Scences
             bool right = m_InputManager.IsKeyboardPress(Keys.Right);
             m_InputManager.EndHandler();
 
-            switch (m_GameMode)
+            spriteManager.Update(gameTime);
+            /*switch (m_GameMode)
             {
                 case PlayMode.Play:
                     if (up)
@@ -74,7 +76,7 @@ namespace BattleShip.Core.Scences
                     break;
                 default:
                     break;
-            }
+            }*/
 
             base.Update(gameTime);
         }
@@ -114,11 +116,9 @@ namespace BattleShip.Core.Scences
 
             this.m_lstGameComponent.Add(m_MapComponent);
 
-            //load player
-            m_Player = new Player(game, m_ResourceManager.imgPlayer, 64, 64);
-            m_Player.SetPosition(new Vector2(game.Window.ClientBounds.Width / 2, 0));
-            this.m_lstGameComponent.Add(m_Player);
-
+            spriteManager = new BattleShip.Core.Sprites.SpriteManager(game);
+            
+            this.m_lstGameComponent.Add(spriteManager);
             //load game screen
             m_GameScreen = new ImageComponent(game, m_ResourceManager.imgGameScreen, ImageComponent.DrawMode.Stretch);
             this.m_lstGameComponent.Add(m_GameScreen);
