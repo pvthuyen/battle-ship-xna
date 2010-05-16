@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace BattleShip.Core.Sprites
 {
-    abstract class Sprite
+    public abstract class Sprite
     {
         Texture2D textureImage;
         protected Vector2 position;
