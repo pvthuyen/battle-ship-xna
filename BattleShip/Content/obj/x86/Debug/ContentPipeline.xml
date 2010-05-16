@@ -7,8 +7,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Font\Arial.xnb</Output>
-      <Time>2010-04-25T15:48:50.5724+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Font\Arial.xnb</Output>
+      <Time>2010-04-26T21:42:36+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Sprite\Computer\Tboot_Trans.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tboot_Trans.xnb</Output>
-      <Time>2010-05-10T22:28:24.4806+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tboot_Trans.xnb</Output>
+      <Time>2010-04-26T21:45:40+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Sprite\Computer\Tfischerboot_Trans.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tfischerboot_Trans.xnb</Output>
-      <Time>2010-05-10T22:28:24.4846+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tfischerboot_Trans.xnb</Output>
+      <Time>2010-04-26T21:45:52+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Sprite\Computer\Tgrokanbo_Trans.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tgrokanbo_Trans.xnb</Output>
-      <Time>2010-05-10T22:28:24.4726+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tgrokanbo_Trans.xnb</Output>
+      <Time>2010-04-26T21:46:04+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Menu\1.jpg</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\1.xnb</Output>
-      <Time>2010-05-15T23:09:27.998+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\1.xnb</Output>
+      <Time>2010-05-11T22:38:34+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Menu\main_1260140920_happy_aquarium_cheats.jpg</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\main_1260140920_happy_aquarium_cheats.xnb</Output>
-      <Time>2010-05-15T23:09:28.002+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\main_1260140920_happy_aquarium_cheats.xnb</Output>
+      <Time>2010-05-11T22:38:34+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Sprite\Computer\Thandelsschiff_Trans.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Thandelsschiff_Trans.xnb</Output>
-      <Time>2010-05-10T22:28:24.4666+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Thandelsschiff_Trans.xnb</Output>
+      <Time>2010-05-07T11:31:26+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Sprite\Computer\Tklpirschi_Trans.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tklpirschi_Trans.xnb</Output>
-      <Time>2010-05-10T22:28:24.4876+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Tklpirschi_Trans.xnb</Output>
+      <Time>2010-05-07T11:56:02+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Sprite\Computer\Twikingerschiff_Trans.png</Source>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Twikingerschiff_Trans.xnb</Output>
-      <Time>2010-05-10T22:28:24.4776+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Sprite\Computer\Twikingerschiff_Trans.xnb</Output>
+      <Time>2010-05-07T10:54:34+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Menu\Intro.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\Intro.xnb</Output>
-      <Time>2010-05-15T23:09:28.005+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\Intro.xnb</Output>
+      <Time>2010-05-12T00:06:28+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Menu\Button.png</Source>
@@ -97,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\Button.xnb</Output>
-      <Time>2010-05-15T23:09:28.007+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Menu\Button.xnb</Output>
+      <Time>2010-05-12T00:21:22+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Background\fulltileset_alpha.png</Source>
@@ -106,8 +106,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Background\fulltileset_alpha.xnb</Output>
-      <Time>2010-05-15T23:09:26.79+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Background\fulltileset_alpha.xnb</Output>
+      <Time>2010-05-12T01:55:30+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Background\gamescreen.png</Source>
@@ -115,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Background\gamescreen.xnb</Output>
-      <Time>2010-05-15T23:09:26.794+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Background\gamescreen.xnb</Output>
+      <Time>2010-05-12T12:01:36+07:00</Time>
     </Item>
     <Item>
       <Source>Resource\Background\editorimages.png</Source>
@@ -124,18 +124,27 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Background\editorimages.xnb</Output>
-      <Time>2010-05-15T23:09:26.785+07:00</Time>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Background\editorimages.xnb</Output>
+      <Time>2010-05-12T12:21:08+07:00</Time>
+    </Item>
+    <Item>
+      <Source>Resource\Background\point.PNG</Source>
+      <Name>Resource\Background\point</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\Resource\Background\point.xnb</Output>
+      <Time>2010-05-16T10:02:36+07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Huy Hoang\Documents\Visual Studio 2008\Projects\battle-ship-xna\BattleShip\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>E:\battle-ship-xna\BattleShip\Content\</RootDirectory>
+      <LoggerRootDirectory>E:\battle-ship-xna\BattleShip\</LoggerRootDirectory>
+      <IntermediateDirectory>E:\battle-ship-xna\BattleShip\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>E:\battle-ship-xna\BattleShip\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -163,8 +172,8 @@
         <Value>2009-05-28T00:16:06+07:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2010-03-01T22:25:21.0076+07:00</Value>
+        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2010-05-11T22:18:21.5610429+07:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

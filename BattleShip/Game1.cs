@@ -166,10 +166,12 @@ namespace BattleShip
             {
                 case BattleShip.Core.GameComponents.TextMenuComponent.GameMenuItem.StartGame:
                     m_ActionScence.GameMode = ActionScence.PlayMode.Play;
+                    IsMouseVisible = false;
                     ShowScence(m_ActionScence);                    
                     break;
                 case BattleShip.Core.GameComponents.TextMenuComponent.GameMenuItem.EditMap:
                     m_ActionScence.GameMode = ActionScence.PlayMode.Edit;
+                    IsMouseVisible = true;
                     ShowScence(m_ActionScence);
                     break;
                 case BattleShip.Core.GameComponents.TextMenuComponent.GameMenuItem.Option:                    

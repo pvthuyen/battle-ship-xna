@@ -39,6 +39,11 @@ namespace BattleShip.Core.GameComponents
             }
         }
 
+        public Rectangle ImgRect
+        {
+            get { return this.m_imgRect; }
+        }
+
         public override void Draw(GameTime gameTime)
         {
             this.m_spriteBatch.Draw(this.m_texture2D, this.m_imgRect, Color.White);

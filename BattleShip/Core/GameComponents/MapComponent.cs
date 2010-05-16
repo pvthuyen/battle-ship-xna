@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using BattleShip.Core.Managers;
 using System.Xml;
+using BattleShip.Core.Sprites;
 
 
 namespace BattleShip.Core.GameComponents
@@ -82,8 +83,28 @@ namespace BattleShip.Core.GameComponents
         private int m_iYLoc;
         private int m_iTileToDraw;
 
+        //information of mini map
+        private Vector2 m_PosMiniMap;
+        private int m_iMiniMapCellWidth;
+        private int m_iMiniMapCellHeight;
+
         private SpriteBatch m_spriteBatch;
         private ResourceManager m_resourceManager;
+
+        public Vector2 PositionMiniMap
+        {
+            set { this.m_PosMiniMap = value; }
+        }
+
+        public int MiniMapCellWidth
+        {
+            set { this.m_iMiniMapCellWidth = value; }
+        }
+
+        public int MiniMapCellHeight
+        {
+            set { this.m_iMiniMapCellHeight = value; }
+        }
 
         public int Left
         {
@@ -249,9 +270,7 @@ namespace BattleShip.Core.GameComponents
    
                 this.m_TileSets.Add(tileSet);
             }
-
-            
-
+                        
             nodeList = mapXml.GetElementsByTagName("TileAnimation");
             foreach (XmlNode node in nodeList)
             {
@@ -350,6 +369,26 @@ namespace BattleShip.Core.GameComponents
             m_iMapData[y, x] = iData;
         }
 
+        public void EditMapBase(int x, int y, int iBase)
+        {
+            m_iMap[y, x] = iBase;
+        }
+
+        public void EditMapTrans(int x, int y, int iTrans)
+        {
+            m_iMapTrans[y, x] = iTrans;
+        }
+
+        public void EditMapObj(int x, int y, int iObj)
+        {
+            m_iMapObj[y, x] = iObj;
+        }
+
+        public void EditMapData(int x, int y, int iData)
+        {
+            m_iMapData[y, x] = iData;
+        }
+
         public int GetMapBase(int x, int y)
         {
             return m_iMap[y, x];
@@ -379,7 +418,7 @@ namespace BattleShip.Core.GameComponents
         {
             foreach (TileAnimation thisAnimation in m_taAnimations)
             {
-                if (thisAnimation.m_iStartFrame <= iTile && thisAnimation.m_iStartFrame + thisAnimation.m_iFrameCount <= iTile)
+                if (thisAnimation.m_iStartFrame <= iTile && thisAnimation.m_iStartFrame + thisAnimation.m_iFrameCount >= iTile)
                 {
                     return true;
                 }
@@ -611,6 +650,49 @@ namespace BattleShip.Core.GameComponents
             UpdateAnimationFrames();
             base.Update(gameTime);
         }
-         
+
+        /// <summary>
+        /// draw the mini map at location (iX, iY) on the screen
+        /// </summary>
+        /// <param name="iX">left of mini map</param>
+        /// <param name="iY">top of mini map</param>
+        /// <param name="arrSprite">array of sprite in action map</param>
+        public void DrawMiniMap(Sprite[] arrSprite)
+        {
+            int i;
+            int j;                       
+
+            for (i = 0; i < m_iMapHeight; i++)
+            {
+                for (j = 0; j < m_iMapWidth; j++)
+                {
+                    int iTile = m_iMap[i, j];
+
+                    Rectangle rect = new Rectangle();
+
+                    rect.Width = this.m_iMiniMapCellWidth;
+                    rect.Height = this.m_iMiniMapCellHeight;
+                    
+                    rect.X = (int)(this.m_PosMiniMap.X + j * rect.Width);
+                    rect.Y = (int)(this.m_PosMiniMap.Y + i * rect.Height);
+
+                    //draw base
+                    m_spriteBatch.Draw(m_TileSets[(iTile / 10000)].m_t2dTexture,
+                                             rect,
+                                             GetTileRectangle(iTile),
+                                             Color.White);                                        
+                }
+            }
+
+            //draw pos of array sprite
+
+            //draw client window
+
+        }
+
+        public void DrawTile(SpriteBatch spriteBatch, int tileToDraw)
+        {
+
+        }
     }
 }

@@ -12,6 +12,7 @@ Content\Resource\Menu\Button.xnb
 Content\Resource\Background\fulltileset_alpha.xnb
 Content\Resource\Background\gamescreen.xnb
 Content\Resource\Background\editorimages.xnb
+Content\Resource\Background\point.xnb
 Content\Resource\Sprite\Computer\Tboot_Trans.png
 Content\Resource\Sprite\Computer\Tfischerboot_Trans.png
 Content\Resource\Sprite\Computer\Tgrokanbo_Trans.png
@@ -25,3 +26,4 @@ Content\Resource\Menu\Button.png
 Content\Resource\Background\fulltileset_alpha.png
 Content\Resource\Background\gamescreen.png
 Content\Resource\Background\editorimages.png
+Content\Resource\Background\point.PNG

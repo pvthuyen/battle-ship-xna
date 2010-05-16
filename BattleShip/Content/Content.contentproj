@@ -141,6 +141,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resource\Background\point.PNG">
+      <Name>point</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Resource\Sound\" />
     <Folder Include="Resource\Sprite\Player\" />
   </ItemGroup>
