@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework.Input;
+using BattleShip.Core.GameComponents;
+using Microsoft.Xna.Framework.Graphics;
+using BattleShip.Core.Managers;
 using Microsoft.Xna.Framework;
+using BattleShip.Core.Sprites;
+using Microsoft.Xna.Framework.Input;
 
 namespace BattleShip.Core.Managers
 {
@@ -15,10 +19,25 @@ namespace BattleShip.Core.Managers
         protected GamePadState m_oldGamePadState;
         protected GamePadState m_gamePadState;
 
+        protected MouseState m_mouseState;
+
+        public KeyboardState ksKeyboardState
+        {
+            get { return this.m_keyboardState; }
+            set { this.m_keyboardState = value; }
+        }
+
+        public MouseState msMouseState
+        {
+            get { return this.m_mouseState; }
+            set { this.m_mouseState = value; }
+        }
+
         public InputManager()
         {
             m_oldGamePadState = GamePad.GetState(PlayerIndex.One);
-            m_oldKeyboardState = Keyboard.GetState();
+            m_oldKeyboardState = Keyboard.GetState();                        
+            m_mouseState = Mouse.GetState();
         }
 
         /// <summary>

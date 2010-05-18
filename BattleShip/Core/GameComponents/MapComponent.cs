@@ -21,8 +21,7 @@ namespace BattleShip.Core.GameComponents
     /// This is a game component that implements IUpdateable.
     /// </summary>
     public class MapComponent : Microsoft.Xna.Framework.DrawableGameComponent
-    {
-        
+    {        
         private class TileSet
         {
             public Texture2D m_t2dTexture;
@@ -83,6 +82,19 @@ namespace BattleShip.Core.GameComponents
         private int m_iYLoc;
         private int m_iTileToDraw;
 
+        //info of type of tile: start index, end index, current index (base, trans, obj)
+        private int m_iTileBaseCurrIndex;
+        private int m_iTileBaseStart;
+        private int m_iTileBaseEnd;
+
+        private int m_iTileTransCurrIndex;
+        private int m_iTileTransStart;
+        private int m_iTileTransEnd;
+
+        private int m_iTileObjCurrIndex;
+        private int m_iTileObjStart;
+        private int m_iTileObjEnd;
+
         //information of mini map
         private Vector2 m_PosMiniMap;
         private int m_iMiniMapCellWidth;
@@ -91,19 +103,37 @@ namespace BattleShip.Core.GameComponents
         private SpriteBatch m_spriteBatch;
         private ResourceManager m_resourceManager;
 
+        public int TileBaseStartIndex
+        {
+            get { return this.m_iTileBaseStart; }
+        }
+
+        public int TileTransStartIndex
+        {
+            get { return this.m_iTileTransStart; }
+        }
+
+        public int TileObjStartIndex
+        {
+            get { return this.m_iTileObjStart; }
+        }
+
         public Vector2 PositionMiniMap
         {
             set { this.m_PosMiniMap = value; }
+            get { return this.m_PosMiniMap; }
         }
 
         public int MiniMapCellWidth
         {
             set { this.m_iMiniMapCellWidth = value; }
+            get { return this.m_iMiniMapCellWidth; }
         }
 
         public int MiniMapCellHeight
         {
             set { this.m_iMiniMapCellHeight = value; }
+            get { return this.m_iMiniMapCellHeight; }
         }
 
         public int Left
@@ -269,6 +299,18 @@ namespace BattleShip.Core.GameComponents
                 this.m_iTileWidth = tileSet.m_iTileWidth;
    
                 this.m_TileSets.Add(tileSet);
+
+                m_iTileBaseStart = int.Parse(node.Attributes["TileBaseStart"].Value);
+                m_iTileBaseEnd = int.Parse(node.Attributes["TileBaseEnd"].Value);
+                m_iTileBaseCurrIndex = m_iTileBaseStart;
+
+                m_iTileTransStart = int.Parse(node.Attributes["TileTransStart"].Value);
+                m_iTileTransEnd = int.Parse(node.Attributes["TileTransEnd"].Value);
+                m_iTileTransCurrIndex = m_iTileTransStart;
+
+                m_iTileObjStart = int.Parse(node.Attributes["TileObjStart"].Value);
+                m_iTileObjEnd = int.Parse(node.Attributes["TileObjEnd"].Value);
+                m_iTileObjCurrIndex = m_iTileObjStart;
             }
                         
             nodeList = mapXml.GetElementsByTagName("TileAnimation");
@@ -360,7 +402,7 @@ namespace BattleShip.Core.GameComponents
                 m_iMapY += m_iMapHeight;
             }
         }
-
+                
         public void EditMap(int x, int y, int iBase, int iTrans, int iObj, int iData)
         {
             m_iMap[y, x] = iBase;
@@ -408,6 +450,73 @@ namespace BattleShip.Core.GameComponents
         {
             return m_iMapData[y, x];
         }
+
+        public int GetNextTile(Layer layer)
+        {            
+            switch (layer)
+            {
+                case Layer.Base:                    
+                    m_iTileBaseCurrIndex++;
+                    if (m_iTileBaseCurrIndex > m_iTileBaseEnd)
+                    {
+                        m_iTileBaseCurrIndex = m_iTileBaseStart;
+                    }
+                    return m_iTileBaseCurrIndex;
+                    
+                case Layer.Trans:                    
+                    m_iTileTransCurrIndex++;
+                    if (m_iTileTransCurrIndex > m_iTileTransEnd)
+                    {
+                        m_iTileTransCurrIndex = m_iTileTransStart;
+                    }
+                    return m_iTileTransCurrIndex;                    
+
+                case Layer.Object:             
+                    m_iTileObjCurrIndex++;
+                    if (m_iTileObjCurrIndex > m_iTileObjEnd)
+                    {
+                        m_iTileObjCurrIndex = m_iTileObjStart;
+                    }
+                    return m_iTileObjCurrIndex;
+
+                default:
+                    return -1;
+            }            
+        }
+
+        public int GetPrevTile(Layer layer)
+        {
+            switch (layer)
+            {
+                case Layer.Base:
+                    m_iTileBaseCurrIndex--;
+                    if (m_iTileBaseCurrIndex < m_iTileBaseStart)
+                    {
+                        m_iTileBaseCurrIndex = m_iTileBaseEnd;
+                    }
+                    return m_iTileBaseCurrIndex;
+
+                case Layer.Trans:
+                    m_iTileTransCurrIndex--;
+                    if (m_iTileTransCurrIndex < m_iTileTransStart)
+                    {
+                        m_iTileTransCurrIndex = m_iTileTransEnd;
+                    }
+                    return m_iTileTransCurrIndex;
+
+                case Layer.Object:
+                    m_iTileObjCurrIndex--;
+                    if (m_iTileObjCurrIndex < m_iTileObjStart)
+                    {
+                        m_iTileObjCurrIndex = m_iTileObjEnd;
+                    }
+                    return m_iTileObjCurrIndex;
+
+                default:
+                    return -1;
+            }
+        }
+
 
         /// <summary>
         /// kiem tra 1 tile co phai la trong day animation hay khong
@@ -690,9 +799,19 @@ namespace BattleShip.Core.GameComponents
 
         }
 
-        public void DrawTile(SpriteBatch spriteBatch, int tileToDraw)
-        {
+        public void DrawTile(SpriteBatch spriteBatch, int iTileToDraw, Rectangle rectDestination)
+        {            
+            Rectangle recSource = new Rectangle((iTileToDraw % m_TileSets[0].m_iTilesPerRow ) * m_iTileWidth,
+                                                (iTileToDraw / m_TileSets[0].m_iTilesPerRow) * m_iTileHeight,
+                                                m_iTileWidth, m_iTileHeight );
+            spriteBatch.Draw(m_TileSets[0].m_t2dTexture, rectDestination, recSource, Color.White);
+        }
 
+        public enum Layer
+        {
+            Base,
+            Trans,
+            Object
         }
     }
 }

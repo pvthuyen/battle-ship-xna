@@ -34,30 +34,31 @@ namespace BattleShip.Core.Scences
         #region editor
         private Texture2D t2dEditorImages;
 
-        private Rectangle m_rectBaseBtnSRC;
-        private Rectangle rectEditorBaseButton;
+        Rectangle rectEditorBaseButtonSRC;
+        Rectangle rectEditorBaseButton;
 
-        private Rectangle m_rectTransBtnSRC;
-        private Rectangle rectEditorTransButton;
+        Rectangle rectEditorTransButtonSRC;
+        Rectangle rectEditorTransButton;
+        
+        Rectangle rectEditorObjectButtonSRC;
+        Rectangle rectEditorObjectButton;
+        
+        Rectangle rectEditorXOverlay;
+        Rectangle rectEditorBoxOverlay;
 
-        private Rectangle m_rectObjBtnSRC;
-        private Rectangle rectEditorObjectButton;
+        Rectangle rectSelectTileSRC;
+        Rectangle rectSelectTileDest;
 
-        private Rectangle rectEditorBoxOverlay;
-        private Rectangle rectEditorXOverlay;
-
+        Rectangle rectDrawTile;
+        Rectangle rectPlayField;
+            
 
         private int iEditorModeButtonPressedOffset = 45;
-        private int iEditorCurrentTile;
-
-        private MouseState msMouseState;
-        private KeyboardState ksKeyboardState;
-
-        private int iTileSetXCount = 12;
-        private int iTileSetYCount = 10;
-
-        private int iMapDisplayOffsetX;
-        private int iMapDisplayOffsetY;
+        private int iEditorCurrentTile;      
+          
+        //thoi gian xu ly input
+        float fKeyPressCheckDelay = 0.25f;
+        float fTotalElapsedTime = 0;
 
         private EditorLayerMode iEditorLayerMode = EditorLayerMode.Base;
         #endregion
@@ -78,9 +79,7 @@ namespace BattleShip.Core.Scences
                 default:
                     break;
             }
-
-            spriteManager.Draw(gameTime);
-
+                        
             m_MapComponent.DrawMiniMap(null);
         }
 
@@ -114,68 +113,38 @@ namespace BattleShip.Core.Scences
 
         private void DrawEditorInterface()
         {
-
-            // Draw our Editor interface components.  The spriteBatch object should be in a Begin mode with alpha
-            // blending BEFORE calling this routine.
-            // Draw the square that holds the current tile
-            Rectangle rectBase = m_rectBaseBtnSRC;
-            Rectangle rectTrans = m_rectTransBtnSRC;
-            Rectangle rectObject = m_rectObjBtnSRC;
+            Rectangle rectBase = rectEditorBaseButtonSRC;
+            Rectangle rectTrans = rectEditorTransButtonSRC;
+            Rectangle rectObject = rectEditorObjectButtonSRC;
 
             if (iEditorLayerMode == EditorLayerMode.Base) { rectBase.Offset(0, iEditorModeButtonPressedOffset); }
             if (iEditorLayerMode == EditorLayerMode.Trans) { rectTrans.Offset(0, iEditorModeButtonPressedOffset); }
             if (iEditorLayerMode == EditorLayerMode.Object) { rectObject.Offset(0, iEditorModeButtonPressedOffset); }
 
-            m_SpriteBatch.Draw(t2dEditorImages, new Rectangle(10, 370, 75, 75), new Rectangle(540, 315, 75, 75), Color.White);
+            m_SpriteBatch.Draw(t2dEditorImages, rectSelectTileDest, rectSelectTileSRC, Color.White);
             m_SpriteBatch.Draw(t2dEditorImages, rectEditorObjectButton, rectObject, Color.White);
             m_SpriteBatch.Draw(t2dEditorImages, rectEditorTransButton, rectTrans, Color.White);
             m_SpriteBatch.Draw(t2dEditorImages, rectEditorBaseButton, rectBase, Color.White);
 
-            /*
             int iTileToDraw = iEditorCurrentTile;
-            if (iTileToDraw == iTileAnimationStartFrame)
-            {
-                iTileToDraw += iTileAnimationFrame;
-            }
+            m_MapComponent.DrawTile(m_SpriteBatch, iTileToDraw, rectDrawTile);
 
-            //m_MapComponent.DrawTile(m_SpriteBatch, iTileToDraw);
 
-            Rectangle recSource = new Rectangle((iTileToDraw % iTileSetXCount) * iTileWidth,
-                                                (iTileToDraw / iTileSetXCount) * iTileHeight,
-                                                iTileWidth, iTileHeight);
-            m_SpriteBatch.Draw(t2dTileSet,
-                             new Rectangle(iEditorCurrentTileX, iEditorCurrentTileY, iTileWidth, iTileHeight),
-                             recSource,
-                             Color.White);
-            */
-
-            Rectangle rectPlayField = new Rectangle(iMapDisplayOffsetX, iMapDisplayOffsetY,
-                                                    (iMapDisplayWidth - 1) * 48, (iMapDisplayHeight - 1) * 48);
             // if the mouse is currently in the "playfield", draw it's location
-            if ((msMouseState.X >= rectPlayField.Left) &
-                (msMouseState.X <= rectPlayField.Right) &
-                (msMouseState.Y >= rectPlayField.Top) &
-                (msMouseState.Y <= rectPlayField.Bottom))
+            if (rectPlayField.Contains(m_InputManager.msMouseState.X, m_InputManager.msMouseState.Y))
             {
                 int iOverlayX, iOverlayY;
-                iOverlayX = (((msMouseState.X - iMapDisplayOffsetX) / m_MapComponent.TileWidth) * m_MapComponent.TileWidth) + iMapDisplayOffsetX;
-                iOverlayY = (((msMouseState.Y - iMapDisplayOffsetY) / m_MapComponent.TileHeight) * m_MapComponent.TileHeight) + iMapDisplayOffsetY;
+                iOverlayX = (((m_InputManager.msMouseState.X - m_MapComponent.Left) / m_MapComponent.TileWidth) * m_MapComponent.TileWidth) + m_MapComponent.Left;
+                iOverlayY = (((m_InputManager.msMouseState.Y - m_MapComponent.Top) / m_MapComponent.TileHeight) * m_MapComponent.TileHeight) + m_MapComponent.Top;
                 m_SpriteBatch.Draw(t2dEditorImages,
                                  new Rectangle(iOverlayX, iOverlayY, m_MapComponent.TileWidth, m_MapComponent.TileHeight),
                                  rectEditorBoxOverlay,
                                  Color.White);
             }
-
         }
-
-        int iMapDisplayWidth = 14;           //kich thuot hien thi
-        int iMapDisplayHeight = 8;
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            //scroll map
-            //m_MapComponent.ScrollByPixels(1, 1);
-
             m_InputManager.BeginHandler();
             bool up = m_InputManager.IsKeyboardPress(Keys.Up);
             bool down = m_InputManager.IsKeyboardPress(Keys.Down);
@@ -187,59 +156,46 @@ namespace BattleShip.Core.Scences
             switch (m_GameMode)
             {
                 case PlayMode.Play:
+                    spriteManager.Visible = true;
+                    spriteManager.Enabled = true;
+
                     if (up)
-                    {
-                        //m_Player.GoUp();
+                    {                        
                         m_MapComponent.ScrollByPixels(0, -10);
                     }
                     if (down)
-                    {
-                        //m_Player.GoDown();
+                    {                     
                         m_MapComponent.ScrollByPixels(0, 10);
                     }
                     if (left)
-                    {
-                        //m_Player.TurnLeft();
+                    {                     
                         m_MapComponent.ScrollByPixels(-10, 0);
                     }
                     if (right)
-                    {
-                        //m_Player.TurnRight();
+                    {                     
                         m_MapComponent.ScrollByPixels(10, 0);
                     }
                     break;
 
                 case PlayMode.Edit:
+                    spriteManager.Visible = false;
+                    spriteManager.Enabled = false;
+
+                    m_InputManager.ksKeyboardState = Keyboard.GetState();
+                    m_InputManager.msMouseState = Mouse.GetState();
+
+                    float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    fTotalElapsedTime += elapsed;                    
                     
-                    ksKeyboardState = Keyboard.GetState();
-                    
-                    msMouseState = Mouse.GetState();
-                    /*
-                    // If we AREN'T in the process of completing a smooth-scroll move...
-                    if (iMoveCount <= 0)
-                    {
-                        if (fTotalElapsedTime >= fKeyPressCheckDelay)
+                    if (fTotalElapsedTime >= fKeyPressCheckDelay)
+                    {                        
+                        if (CheckEditorKeys(m_InputManager.ksKeyboardState) == 1)
                         {
-                            if (CheckMapMovementKeys(ksKeyboardState) == 1)
-                            {
-                                fTotalElapsedTime = 0;
-                            }
-                            if (iProgramMode == ProgramMode.EditMode)
-                            {
-                                if (CheckEditorKeys(ksKeyboardState) == 1)
-                                {
-                                    fTotalElapsedTime = 0;
-                                }
-                            }
-                        }
-                        // Check for Editor Mode Mouse Clicks
-                        if (iProgramMode == ProgramMode.EditMode)
-                        {
-                            CheckEditorModeMouseClicks(msMouseState, ksKeyboardState);
+                            fTotalElapsedTime = 0;
                         }
                     }
-                    */
-                    CheckEditorModeMouseClicks(msMouseState, ksKeyboardState);
+                    CheckEditorModeMouseClicks(m_InputManager.msMouseState, m_InputManager.ksKeyboardState);
                     break;
                 default:
                     break;
@@ -307,42 +263,77 @@ namespace BattleShip.Core.Scences
 
             m_MapComponent.MiniMapCellWidth = (int)(1.0 * 120 * width / widthSRC) / m_MapComponent.MapWidth;
             m_MapComponent.MiniMapCellHeight = (int)(1.0 * 100 * height / heightSRC) / m_MapComponent.MapHeight;
+
+            //draw edit mode
+            int leftRectSelTile = m_MapComponent.MiniMapCellWidth * m_MapComponent.Width + 100;
+            int top = game.Window.ClientBounds.Height - m_MapComponent.MiniMapCellHeight * m_MapComponent.Height + 10;
+
+            rectSelectTileSRC = new Rectangle(540, 315, 75, 75);
+            rectSelectTileDest = new Rectangle(leftRectSelTile, top - 60, 75, 75);
+            rectDrawTile = new Rectangle(leftRectSelTile + 18, top - 52, 48, 48);
+
+            int leftBtn = leftRectSelTile + rectSelectTileSRC.Width + 20;
+            rectEditorBaseButtonSRC = new Rectangle(540, 225, 80, 30);
+            rectEditorBaseButton = new Rectangle(leftBtn, top, 80, 30);
+            
+            rectEditorTransButtonSRC = new Rectangle(540, 45, 80, 30);
+            rectEditorTransButton = new Rectangle(leftBtn, top - 30, 80, 30);
+
+            rectEditorObjectButtonSRC = new Rectangle(540, 135, 80, 30);
+            rectEditorObjectButton = new Rectangle(leftBtn, top - 60, 80, 30);
+
+            rectEditorXOverlay = new Rectangle(405, 270, 48, 48);
+            rectEditorBoxOverlay = new Rectangle(405, 360, 48, 48);
+
+            rectPlayField = new Rectangle(m_MapComponent.Left, m_MapComponent.Top,m_GameScreen.ImgRect.Width,(int)(m_MapComponent.PositionMiniMap.Y - 58));
         }
 
         int CheckEditorKeys(KeyboardState ksKeyboardState)
         {
             if (ksKeyboardState.IsKeyDown(Keys.O))
-            {
-                //WriteMapToFile("map000.txt");
+            {                
                 return 1;
             }
             if (ksKeyboardState.IsKeyDown(Keys.L))
-            {
-                //ReadMapFromFile("map000.txt");
+            {             
                 return 1;
             }
-            if (ksKeyboardState.IsKeyDown(Keys.W))
-            {
-                iEditorCurrentTile -= 12;
-                if (iEditorCurrentTile < 0) { iEditorCurrentTile += 12; }
-                return 1;
-            }
+            
             if (ksKeyboardState.IsKeyDown(Keys.A))
             {
-                iEditorCurrentTile--;
-                if (iEditorCurrentTile < 0) { iEditorCurrentTile++; }
-                return 1;
+                switch (iEditorLayerMode)
+                {
+                    case EditorLayerMode.Base:
+                        iEditorCurrentTile = m_MapComponent.GetPrevTile(MapComponent.Layer.Base);
+                        break;
+                    case EditorLayerMode.Trans:
+                        iEditorCurrentTile = m_MapComponent.GetPrevTile(MapComponent.Layer.Trans);
+                        break;
+                    case EditorLayerMode.Object:
+                        iEditorCurrentTile = m_MapComponent.GetPrevTile(MapComponent.Layer.Object);
+                        break;
+                    default:
+                        break;
+                }
+                return 1;                
             }
-            if (ksKeyboardState.IsKeyDown(Keys.S))
-            {
-                iEditorCurrentTile += 12;
-                if (iEditorCurrentTile > 120) { iEditorCurrentTile -= 12; }
-                return 1;
-            }
+            
             if (ksKeyboardState.IsKeyDown(Keys.D))
             {
-                iEditorCurrentTile++;
-                if (iEditorCurrentTile > 120) { iEditorCurrentTile--; }
+                switch (iEditorLayerMode)
+                {
+                    case EditorLayerMode.Base:
+                        iEditorCurrentTile = m_MapComponent.GetNextTile(MapComponent.Layer.Base);
+                        break;
+                    case EditorLayerMode.Trans:
+                        iEditorCurrentTile = m_MapComponent.GetNextTile(MapComponent.Layer.Trans);
+                        break;
+                    case EditorLayerMode.Object:
+                        iEditorCurrentTile = m_MapComponent.GetNextTile(MapComponent.Layer.Object);
+                        break;
+                    default:
+                        break;
+                }
                 return 1;
             }
             return 0;
@@ -350,46 +341,32 @@ namespace BattleShip.Core.Scences
 
         void CheckEditorModeMouseClicks(MouseState msMouseState, KeyboardState ksKeyboardState)
         {
-            Rectangle rectPlayField = new Rectangle(iMapDisplayOffsetX, iMapDisplayOffsetY,
-                                          (iMapDisplayWidth - 1) * m_MapComponent.TileWidth,
-                                          (iMapDisplayHeight - 1) * m_MapComponent.TileHeight);
-            // Check for mouse clicks
+             // Check for mouse clicks
             if (msMouseState.LeftButton == ButtonState.Pressed)
             {
-                // First, lets check to see if we click on one of the "mode" buttons.  If we do,
-                // update the iEditorLayerMode variable as appropritate.
-                if ((msMouseState.X >= rectEditorObjectButton.Left) &
-                     (msMouseState.X <= rectEditorObjectButton.Right) &
-                     (msMouseState.Y >= rectEditorObjectButton.Top) &
-                     (msMouseState.Y <= rectEditorObjectButton.Bottom))
+                //check mouse click on button
+                if ( rectEditorObjectButton.Contains(msMouseState.X,m_InputManager.msMouseState.Y))
                 {
                     iEditorLayerMode = EditorLayerMode.Object;
+                    iEditorCurrentTile = m_MapComponent.TileObjStartIndex;
                 }
-                if ((msMouseState.X >= rectEditorTransButton.Left) &
-                     (msMouseState.X <= rectEditorTransButton.Right) &
-                     (msMouseState.Y >= rectEditorTransButton.Top) &
-                     (msMouseState.Y <= rectEditorTransButton.Bottom))
+                if (rectEditorTransButton.Contains(msMouseState.X,msMouseState.Y))
                 {
                     iEditorLayerMode = EditorLayerMode.Trans;
+                    iEditorCurrentTile = m_MapComponent.TileTransStartIndex;
                 }
-                if ((msMouseState.X >= rectEditorBaseButton.Left) &
-                     (msMouseState.X <= rectEditorBaseButton.Right) &
-                     (msMouseState.Y >= rectEditorBaseButton.Top) &
-                     (msMouseState.Y <= rectEditorBaseButton.Bottom))
+                if (rectEditorBaseButton.Contains(msMouseState.X,msMouseState.Y))
                 {
                     iEditorLayerMode = EditorLayerMode.Base;
+                    iEditorCurrentTile = m_MapComponent.TileBaseStartIndex;
                 }
-                // Finally, lets check to see if we are clicking inside the map area.  If so, we
-                // will update the appropriate layer of the clicked tile with the currrently selected
-                // drawing tile.
-                if ((msMouseState.X >= rectPlayField.Left) &
-                    (msMouseState.X <= rectPlayField.Right) &
-                    (msMouseState.Y >= rectPlayField.Top) &
-                    (msMouseState.Y <= rectPlayField.Bottom))
+
+                //check mouse click on play field
+                if  (rectPlayField.Contains(msMouseState.X,msMouseState.Y))
                 {
                     // Determine the X and Y tile location of where we clicked
-                    int iClickedX = ((msMouseState.X - iMapDisplayOffsetX) / m_MapComponent.TileWidth) + m_MapComponent.MapX;
-                    int iClickedY = ((msMouseState.Y - iMapDisplayOffsetY) / m_MapComponent.TileHeight) + m_MapComponent.MapY;
+                    int iClickedX = ((msMouseState.X - m_MapComponent.Left) / m_MapComponent.TileWidth) + m_MapComponent.MapX;
+                    int iClickedY = ((msMouseState.Y - m_MapComponent.Top) / m_MapComponent.TileHeight) + m_MapComponent.MapY;
                     // If we are in "Base" mode:
                     if (iEditorLayerMode == EditorLayerMode.Base)
                     {
@@ -407,18 +384,16 @@ namespace BattleShip.Core.Scences
                     }
                 }
             }
+
             // we will use the right mouse button to toggle walkable and non-walkable squares.
             if (msMouseState.RightButton == ButtonState.Pressed)
             {
                 // If we right-clicked in the map area...
-                if ((msMouseState.X >= rectPlayField.Left) &
-                    (msMouseState.X <= rectPlayField.Right) &
-                    (msMouseState.Y >= rectPlayField.Top) &
-                    (msMouseState.Y <= rectPlayField.Bottom))
+                if (rectPlayField.Contains(msMouseState.X,msMouseState.Y))
                 {
                     // Determine the X and Y tile location of where we clicked
-                    int iClickedX = ((msMouseState.X - iMapDisplayOffsetX) / m_MapComponent.TileWidth) + m_MapComponent.MapX;
-                    int iClickedY = ((msMouseState.Y - iMapDisplayOffsetY) / m_MapComponent.TileHeight) + m_MapComponent.MapY;
+                    int iClickedX = ((msMouseState.X - m_MapComponent.Left) / m_MapComponent.TileWidth) + m_MapComponent.MapX;
+                    int iClickedY = ((msMouseState.Y - m_MapComponent.Top) / m_MapComponent.TileHeight) + m_MapComponent.MapY;
                     if (ksKeyboardState.IsKeyDown(Keys.RightShift) || ksKeyboardState.IsKeyDown(Keys.LeftShift))
                     {
                         // Shift-Right Clicking clears the walkable flag
@@ -432,8 +407,7 @@ namespace BattleShip.Core.Scences
                 }
             }
         }
-
-
+        
         public enum PlayMode
         {
             Play,
