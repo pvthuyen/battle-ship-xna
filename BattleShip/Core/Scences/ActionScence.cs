@@ -51,7 +51,18 @@ namespace BattleShip.Core.Scences
 
         Rectangle rectDrawTile;
         Rectangle rectPlayField;
-            
+
+        Rectangle rectSaveMapSRC;
+        Rectangle rectSaveMapDest;
+
+        Rectangle rectClearMapSRC;
+        Rectangle rectClearMapDest;
+
+        Rectangle rectNextBtnSRC;
+        Rectangle rectNextBtnDest;
+
+        Rectangle rectPrevBtnSRC;
+        Rectangle rectPrevBtnDest;
 
         private int iEditorModeButtonPressedOffset = 45;
         private int iEditorCurrentTile;      
@@ -62,6 +73,99 @@ namespace BattleShip.Core.Scences
 
         private EditorLayerMode iEditorLayerMode = EditorLayerMode.Base;
         #endregion
+
+        public ActionScence(Game game)
+            : base(game)
+        {
+            m_SpriteBatch = game.Services.GetService(typeof(SpriteBatch)) as SpriteBatch;
+            m_SoundManager = game.Services.GetService(typeof(SoundManager)) as SoundManager;
+            m_ResourceManager = game.Services.GetService(typeof(ResourceManager)) as ResourceManager;
+            m_InputManager = new InputManager();
+
+            //load map
+            m_MapComponent = new MapComponent(game);
+            m_MapComponent.LoadMap("Maps.xml", 1);
+
+            m_MapComponent.Left = 0;
+            m_MapComponent.Top = 0;
+            m_MapComponent.Width = 18;
+            m_MapComponent.Height = 14;
+
+            m_MapComponent.DrawFirstRowTilesOnTransLayers = false;
+
+            m_MapComponent.Enabled = true;
+            m_MapComponent.Visible = true;
+
+            this.m_lstGameComponent.Add(m_MapComponent);
+
+            //add sprite manager
+            spriteManager = new SpriteManager(game);
+            this.m_lstGameComponent.Add(spriteManager);
+
+            //load game screen
+            m_GameScreen = new ImageComponent(game, m_ResourceManager.imgGameScreen, ImageComponent.DrawMode.Stretch);
+            this.m_lstGameComponent.Add(m_GameScreen);
+
+            t2dEditorImages = m_ResourceManager.imgGameEditor;
+
+            //config mini map
+            int width = m_GameScreen.ImgRect.Width;
+            int height = m_GameScreen.ImgRect.Height;
+
+            int widthSRC = m_ResourceManager.imgGameScreen.Width;
+            int heightSRC = m_ResourceManager.imgGameScreen.Height;
+
+            double x = 1.0 * 18 * width / widthSRC;
+            double y = 1.0 * 370 * height / heightSRC;
+            Vector2 posMiniMap = new Vector2((float)x, (float)y);
+
+            m_MapComponent.PositionMiniMap = posMiniMap;
+
+            m_MapComponent.MiniMapCellWidth = (int)(1.0 * 120 * width / widthSRC) / m_MapComponent.MapWidth;
+            m_MapComponent.MiniMapCellHeight = (int)(1.0 * 100 * height / heightSRC) / m_MapComponent.MapHeight;
+
+            InitButtonLocation();                        
+        }
+
+        private void InitButtonLocation()
+        {
+            //draw edit mode
+            int leftRectSelTile = m_MapComponent.MiniMapCellWidth * m_MapComponent.Width + 100;
+            int top = Game.Window.ClientBounds.Height - m_MapComponent.MiniMapCellHeight * m_MapComponent.Height + 10;
+
+            //init button location
+            rectSelectTileSRC = new Rectangle(540, 315, 75, 75);
+            rectSelectTileDest = new Rectangle(leftRectSelTile, top - 60, 75, 75);
+            rectDrawTile = new Rectangle(leftRectSelTile + 18, top - 52, 48, 48);
+
+            rectNextBtnSRC = new Rectangle(600, 393, 10, 14);
+            rectNextBtnDest = new Rectangle(leftRectSelTile + rectSelectTileDest.Width * 2 / 3, top - 60 + rectSelectTileDest.Height + 5, 10, 12);
+
+            rectPrevBtnSRC = new Rectangle(587, 393, 10, 14);
+            rectPrevBtnDest = new Rectangle(leftRectSelTile + rectSelectTileDest.Width / 3, top - 60 + rectSelectTileDest.Height + 5, 10, 12);
+            
+            int leftBtn = leftRectSelTile + rectSelectTileSRC.Width + 20;
+            rectEditorBaseButtonSRC = new Rectangle(540, 225, 80, 30);
+            rectEditorBaseButton = new Rectangle(leftBtn, top, 80, 30);
+
+            rectEditorTransButtonSRC = new Rectangle(540, 45, 80, 30);
+            rectEditorTransButton = new Rectangle(leftBtn, top - 30, 80, 30);
+
+            rectEditorObjectButtonSRC = new Rectangle(540, 135, 80, 30);
+            rectEditorObjectButton = new Rectangle(leftBtn, top - 60, 80, 30);
+
+            rectEditorXOverlay = new Rectangle(405, 270, 48, 48);
+            rectEditorBoxOverlay = new Rectangle(405, 360, 48, 48);
+
+            rectPlayField = new Rectangle(m_MapComponent.Left, m_MapComponent.Top, m_GameScreen.ImgRect.Width, (int)(m_MapComponent.PositionMiniMap.Y - 58));
+
+            leftBtn = leftBtn + rectEditorBaseButton.Width + 20;
+            rectSaveMapSRC = new Rectangle(405, 0, 134, 43);
+            rectSaveMapDest = new Rectangle(leftBtn, top, 134, 43);
+
+            rectClearMapSRC = new Rectangle(405, 45, 134, 43);
+            rectClearMapDest = new Rectangle(leftBtn, top - rectSaveMapSRC.Height - 10, 134, 43);                        
+        }
 
         public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
         {
@@ -125,6 +229,10 @@ namespace BattleShip.Core.Scences
             m_SpriteBatch.Draw(t2dEditorImages, rectEditorObjectButton, rectObject, Color.White);
             m_SpriteBatch.Draw(t2dEditorImages, rectEditorTransButton, rectTrans, Color.White);
             m_SpriteBatch.Draw(t2dEditorImages, rectEditorBaseButton, rectBase, Color.White);
+            m_SpriteBatch.Draw(t2dEditorImages, rectSaveMapDest, rectSaveMapSRC, Color.White);
+            m_SpriteBatch.Draw(t2dEditorImages, rectClearMapDest, rectClearMapSRC, Color.White);
+            m_SpriteBatch.Draw(t2dEditorImages, rectNextBtnDest, rectNextBtnSRC, Color.White);
+            m_SpriteBatch.Draw(t2dEditorImages, rectPrevBtnDest, rectPrevBtnSRC, Color.White);
 
             int iTileToDraw = iEditorCurrentTile;
             m_MapComponent.DrawTile(m_SpriteBatch, iTileToDraw, rectDrawTile);
@@ -151,8 +259,7 @@ namespace BattleShip.Core.Scences
             bool left = m_InputManager.IsKeyboardPress(Keys.Left);
             bool right = m_InputManager.IsKeyboardPress(Keys.Right);
             m_InputManager.EndHandler();
-
-            
+                        
             switch (m_GameMode)
             {
                 case PlayMode.Play:
@@ -190,12 +297,10 @@ namespace BattleShip.Core.Scences
                     
                     if (fTotalElapsedTime >= fKeyPressCheckDelay)
                     {                        
-                        if (CheckEditorKeys(m_InputManager.ksKeyboardState) == 1)
-                        {
-                            fTotalElapsedTime = 0;
-                        }
+                        CheckEditorKeys(m_InputManager.ksKeyboardState);
+                        fTotalElapsedTime = 0;
                     }
-                    CheckEditorModeMouseClicks(m_InputManager.msMouseState, m_InputManager.ksKeyboardState);
+                    CheckEditorMouseClicks(m_InputManager.msMouseState, m_InputManager.ksKeyboardState);
                     break;
                 default:
                     break;
@@ -213,81 +318,7 @@ namespace BattleShip.Core.Scences
             //stop sound
             base.HideScreen();
         }
-
-        public ActionScence(Game game)
-            : base(game)
-        {
-            m_SpriteBatch = game.Services.GetService(typeof(SpriteBatch)) as SpriteBatch;
-            m_SoundManager = game.Services.GetService(typeof(SoundManager)) as SoundManager;
-            m_ResourceManager = game.Services.GetService(typeof(ResourceManager)) as ResourceManager;
-            m_InputManager = new InputManager();
-
-            //load map
-            m_MapComponent = new MapComponent(game);
-            m_MapComponent.LoadMap("Maps.xml", 1);
-
-            m_MapComponent.Left = 0;
-            m_MapComponent.Top = 0;
-            m_MapComponent.Width = 18;
-            m_MapComponent.Height = 14;
-
-            m_MapComponent.DrawFirstRowTilesOnTransLayers = false;
-
-            m_MapComponent.Enabled = true;
-            m_MapComponent.Visible = true;
-
-            this.m_lstGameComponent.Add(m_MapComponent);
-
-            //add sprite manager
-            spriteManager = new SpriteManager(game);
-            this.m_lstGameComponent.Add(spriteManager);
-
-            //load game screen
-            m_GameScreen = new ImageComponent(game, m_ResourceManager.imgGameScreen, ImageComponent.DrawMode.Stretch);
-            this.m_lstGameComponent.Add(m_GameScreen);
-
-            t2dEditorImages = m_ResourceManager.imgGameEditor;
-
-            //config mini map
-            int width = m_GameScreen.ImgRect.Width;
-            int height = m_GameScreen.ImgRect.Height;
-
-            int widthSRC = m_ResourceManager.imgGameScreen.Width;
-            int heightSRC = m_ResourceManager.imgGameScreen.Height;
-
-            double x = 1.0 * 18 * width / widthSRC;
-            double y = 1.0 * 370 * height / heightSRC;
-            Vector2 posMiniMap = new Vector2((float)x, (float)y);
-
-            m_MapComponent.PositionMiniMap = posMiniMap;
-
-            m_MapComponent.MiniMapCellWidth = (int)(1.0 * 120 * width / widthSRC) / m_MapComponent.MapWidth;
-            m_MapComponent.MiniMapCellHeight = (int)(1.0 * 100 * height / heightSRC) / m_MapComponent.MapHeight;
-
-            //draw edit mode
-            int leftRectSelTile = m_MapComponent.MiniMapCellWidth * m_MapComponent.Width + 100;
-            int top = game.Window.ClientBounds.Height - m_MapComponent.MiniMapCellHeight * m_MapComponent.Height + 10;
-
-            rectSelectTileSRC = new Rectangle(540, 315, 75, 75);
-            rectSelectTileDest = new Rectangle(leftRectSelTile, top - 60, 75, 75);
-            rectDrawTile = new Rectangle(leftRectSelTile + 18, top - 52, 48, 48);
-
-            int leftBtn = leftRectSelTile + rectSelectTileSRC.Width + 20;
-            rectEditorBaseButtonSRC = new Rectangle(540, 225, 80, 30);
-            rectEditorBaseButton = new Rectangle(leftBtn, top, 80, 30);
-            
-            rectEditorTransButtonSRC = new Rectangle(540, 45, 80, 30);
-            rectEditorTransButton = new Rectangle(leftBtn, top - 30, 80, 30);
-
-            rectEditorObjectButtonSRC = new Rectangle(540, 135, 80, 30);
-            rectEditorObjectButton = new Rectangle(leftBtn, top - 60, 80, 30);
-
-            rectEditorXOverlay = new Rectangle(405, 270, 48, 48);
-            rectEditorBoxOverlay = new Rectangle(405, 360, 48, 48);
-
-            rectPlayField = new Rectangle(m_MapComponent.Left, m_MapComponent.Top,m_GameScreen.ImgRect.Width,(int)(m_MapComponent.PositionMiniMap.Y - 58));
-        }
-
+                
         int CheckEditorKeys(KeyboardState ksKeyboardState)
         {
             if (ksKeyboardState.IsKeyDown(Keys.O))
@@ -339,7 +370,7 @@ namespace BattleShip.Core.Scences
             return 0;
         }
 
-        void CheckEditorModeMouseClicks(MouseState msMouseState, KeyboardState ksKeyboardState)
+        void CheckEditorMouseClicks(MouseState msMouseState, KeyboardState ksKeyboardState)
         {
              // Check for mouse clicks
             if (msMouseState.LeftButton == ButtonState.Pressed)
@@ -359,6 +390,51 @@ namespace BattleShip.Core.Scences
                 {
                     iEditorLayerMode = EditorLayerMode.Base;
                     iEditorCurrentTile = m_MapComponent.TileBaseStartIndex;
+                }
+                if (rectPrevBtnDest.Contains(msMouseState.X, msMouseState.Y))
+                {
+                    switch (iEditorLayerMode)
+                    {
+                        case EditorLayerMode.Base:
+                            iEditorCurrentTile = m_MapComponent.GetPrevTile(MapComponent.Layer.Base);
+                            break;
+                        case EditorLayerMode.Trans:
+                            iEditorCurrentTile = m_MapComponent.GetPrevTile(MapComponent.Layer.Trans);
+                            break;
+                        case EditorLayerMode.Object:
+                            iEditorCurrentTile = m_MapComponent.GetPrevTile(MapComponent.Layer.Object);
+                            break;
+                        default:
+                            break;
+                    }                    
+                }
+                if (rectNextBtnDest.Contains(msMouseState.X, msMouseState.Y))
+                {
+                    switch (iEditorLayerMode)
+                    {
+                        case EditorLayerMode.Base:
+                            iEditorCurrentTile = m_MapComponent.GetNextTile(MapComponent.Layer.Base);
+                            break;
+                        case EditorLayerMode.Trans:
+                            iEditorCurrentTile = m_MapComponent.GetNextTile(MapComponent.Layer.Trans);
+                            break;
+                        case EditorLayerMode.Object:
+                            iEditorCurrentTile = m_MapComponent.GetNextTile(MapComponent.Layer.Object);
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                }
+
+                if (rectSaveMapDest.Contains(msMouseState.X, msMouseState.Y))
+                {
+                    m_MapComponent.SaveMap(@"Maps.xml");
+                }
+
+                if (rectClearMapDest.Contains(msMouseState.X, msMouseState.Y))
+                {
+                    m_MapComponent.ClearMap();
                 }
 
                 //check mouse click on play field

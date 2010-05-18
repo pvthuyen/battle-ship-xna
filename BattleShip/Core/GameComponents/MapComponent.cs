@@ -329,9 +329,91 @@ namespace BattleShip.Core.GameComponents
         /// <summary>
         /// luu map vao file xml
         /// </summary>
-        public void SaveMap()
+        public void SaveMap(String strXmlFile)
         {
+            XmlWriter writer;
+            
+            XmlDocument mapXml = new XmlDocument();
+            mapXml.Load(strXmlFile);
 
+            XmlElement elem = mapXml.CreateElement("Data");
+            
+            /*
+            mapXml.a
+
+            //read data
+            XmlNodeList nodeList = mapXml.GetElementsByTagName("Data");
+            string data = string.Empty;
+            foreach (XmlNode node in nodeList)
+            {
+                this.m_iMapWidth = int.Parse(node.Attributes["MapWidth"].Value);
+                this.m_iMapHeight = int.Parse(node.Attributes["MapHeight"].Value);
+                data = node.InnerText;
+            }
+
+            m_iMapData = new int[this.m_iMapWidth, this.m_iMapHeight];
+            m_iMapObj = new int[this.m_iMapWidth, this.m_iMapHeight];
+            m_iMapTrans = new int[this.m_iMapWidth, this.m_iMapHeight];
+            m_iMap = new int[this.m_iMapWidth, this.m_iMapHeight];
+
+            int i, j;
+            string[] arrValue = data.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            int index = 0;
+            for (i = 0; i < this.m_iMapHeight; i++)
+            {
+                for (j = 0; j < this.m_iMapWidth; j++)
+                {
+                    m_iMap[i, j] = int.Parse(arrValue[index++]);
+                    m_iMapTrans[i, j] = int.Parse(arrValue[index++]);
+                    m_iMapObj[i, j] = int.Parse(arrValue[index++]);
+                    m_iMapData[i, j] = int.Parse(arrValue[index++]);
+                }
+            }
+
+            //read tile set
+            nodeList = mapXml.GetElementsByTagName("TileSet");
+            foreach (XmlNode node in nodeList)
+            {
+                TileSet tileSet = new TileSet();
+                tileSet.m_strFileName = node.Attributes["FileName"].Value;
+                tileSet.m_t2dTexture = m_resourceManager.LoadTexture(@"Resource/Background/" + tileSet.m_strFileName);
+                tileSet.m_iTileWidth = int.Parse(node.Attributes["TileWidth"].Value);
+                tileSet.m_iTileHeight = int.Parse(node.Attributes["TileHeight"].Value);
+                tileSet.m_iVerticalSpacing = int.Parse(node.Attributes["VerticalSpacing"].Value);
+                tileSet.m_iHorizontalSpacing = int.Parse(node.Attributes["HorizontalSpacing"].Value);
+                tileSet.m_iTilesPerRow = tileSet.m_t2dTexture.Width /
+                                         (tileSet.m_iTileWidth + tileSet.m_iHorizontalSpacing);
+
+                this.m_iTileHeight = tileSet.m_iTileHeight;
+                this.m_iTileWidth = tileSet.m_iTileWidth;
+
+                this.m_TileSets.Add(tileSet);
+
+                m_iTileBaseStart = int.Parse(node.Attributes["TileBaseStart"].Value);
+                m_iTileBaseEnd = int.Parse(node.Attributes["TileBaseEnd"].Value);
+                m_iTileBaseCurrIndex = m_iTileBaseStart;
+
+                m_iTileTransStart = int.Parse(node.Attributes["TileTransStart"].Value);
+                m_iTileTransEnd = int.Parse(node.Attributes["TileTransEnd"].Value);
+                m_iTileTransCurrIndex = m_iTileTransStart;
+
+                m_iTileObjStart = int.Parse(node.Attributes["TileObjStart"].Value);
+                m_iTileObjEnd = int.Parse(node.Attributes["TileObjEnd"].Value);
+                m_iTileObjCurrIndex = m_iTileObjStart;
+            }
+
+            nodeList = mapXml.GetElementsByTagName("TileAnimation");
+            foreach (XmlNode node in nodeList)
+            {
+                TileAnimation ta = new TileAnimation();
+                ta.m_iCurrentFrame = 0;
+                ta.m_iStartFrame = int.Parse(node.Attributes["StartFrame"].Value);
+                ta.m_iFrameCount = int.Parse(node.Attributes["FrameCount"].Value);
+                ta.m_iFrameRate = int.Parse(node.Attributes["FrameRate"].Value);
+
+                this.m_taAnimations.Add(ta);
+            }                 
+             */
         }
                
         /// <summary>
@@ -812,6 +894,11 @@ namespace BattleShip.Core.GameComponents
             Base,
             Trans,
             Object
+        }
+
+        public void ClearMap()
+        {
+            
         }
     }
 }
