@@ -41,12 +41,13 @@ namespace BattleShip.Core.Sprites
                     inputDirection.Y -= 1;
                 if (Keyboard.GetState().IsKeyDown(Keys.Down))
                     inputDirection.Y += 1;
-
+                /*
                 GamePadState gamepadState = GamePad.GetState(PlayerIndex.One);
                 if (gamepadState.ThumbSticks.Left.X != 0)
                     inputDirection.X += gamepadState.ThumbSticks.Left.X;
                 if (gamepadState.ThumbSticks.Left.Y != 0)
                     inputDirection.Y += gamepadState.ThumbSticks.Left.Y;
+                 */
                 return inputDirection * speed;
             }
         }
@@ -55,7 +56,7 @@ namespace BattleShip.Core.Sprites
         {
             // Move the sprite according to the direction property
             position += direction;
-
+            /*
             // If the mouse moved, set the position of the sprite to the mouse position
             MouseState currMouseState = Mouse.GetState();
 
@@ -65,7 +66,7 @@ namespace BattleShip.Core.Sprites
                 position = new Vector2(currMouseState.X, currMouseState.Y);
             }
             prevMouseState = currMouseState;
-
+            */
             // If the sprite is off the screen, put it back in play
             if (position.X < 0)
                 position.X = 0;

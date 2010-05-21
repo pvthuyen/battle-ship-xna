@@ -8,17 +8,40 @@ using Microsoft.Xna.Framework;
 namespace BattleShip.Core.Sprites
 {
     public abstract class Sprite
-    {
+    {        
         Texture2D textureImage;
+     
         protected Vector2 position;
         protected Point frameSize;
-        int collisionOffset;
-        Point currentFrame;
-        Point sheetSize;
-        int timeSinceLastFrame = 0;
-        int millisecondsPerFrame;
+        protected int collisionOffset;
+        protected Point currentFrame;
+        protected Point sheetSize;
+        protected int timeSinceLastFrame = 0;
+        protected int millisecondsPerFrame;
         protected Vector2 speed;
-        const int defaultMillisecondsPerFrame = 16;
+        protected const int defaultMillisecondsPerFrame = 16;
+                
+        protected int m_iAttack;
+        protected int m_iDefence;
+        protected int m_iHP;
+                
+        public int Attack
+        {
+            get { return m_iAttack; }
+            set { m_iAttack = value; }
+        }
+        
+        public int Defence
+        {
+            get { return m_iDefence; }
+            set { m_iDefence = value; }
+        }
+        
+        public int HP
+        {
+            get { return m_iHP; }
+            set { m_iHP = value; }
+        }
 
         //Audio cue name for collisions
         public string collisionCueName { get; private set; }
@@ -91,5 +114,6 @@ namespace BattleShip.Core.Sprites
                 Color.White, 0, Vector2.Zero,
                 1f, SpriteEffects.None, 0);
         }
+         
     }
 }
