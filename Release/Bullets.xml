@@ -1,0 +1,5 @@
+<Bullets>
+	<Bullet Name="missle2" TileWidth="16" TileHeight="48" FrameCount="2" Speed="4" NumBullet="50" Attack="5" CollisionBufferX="0" CollisionBufferY="0" SoundEffect="DoubleMachineGunFire"/>
+	<Bullet Name="bullet1" TileWidth="16" TileHeight="16" FrameCount="2" Speed="5" NumBullet="100" Attack="7" CollisionBufferX="0" CollisionBufferY="0" SoundEffect="PeashooterFire"/>
+	<Bullet Name="bullet2" TileWidth="1" TileHeight="16" FrameCount="2" Speed="7" NumBullet="100" Attack="3" CollisionBufferX="0" CollisionBufferY="0" SoundEffect="PeashooterFire"/>
+</Bullets>

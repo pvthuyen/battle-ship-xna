@@ -1,0 +1,116 @@
+<Units>
+	<Unit name="Player">
+		<TileSet FileName="Tboot_Trans"/>
+		<Sink IsSail="true" Offset="34">
+			<Up X="0" Y="180" TileWidth="30" TileHeight="36" FrameCount="9"/>
+			<Down X="0" Y="216" TileWidth="28" TileHeight="44" FrameCount="9"/>
+			<Left X="0" Y="260" TileWidth="38" TileHeight="38" FrameCount="9"/>
+			<Right X="0" Y="148" TileWidth="38" TileHeight="32" FrameCount="9"/>
+		</Sink>
+		<Position IsSail="true" Offset="17">
+			<Up X="0" Y="180" TileWidth="30" TileHeight="36" FrameCount="1"/>
+			<Down X="0" Y="216" TileWidth="28" TileHeight="44" FrameCount="1"/>
+			<Left X="0" Y="260" TileWidth="38" TileHeight="38" FrameCount="1"/>
+			<Right X="0" Y="148" TileWidth="38" TileHeight="32" FrameCount="1"/>
+		</Position>		
+		<Properties Attack="5" Defence="5" HP="50" Speed="5" Point="0" TimeDelayAttack="0.5"/>
+	</Unit>
+	<Unit name="Computer1">
+		<TileSet FileName="Twikingerschiff_Trans" />
+		<Sink IsSail="true" Offset="34">
+			<Up X="0" Y="50" TileWidth="40" TileHeight="54" FrameCount="9"/>
+			<Down X="0" Y="104" TileWidth="42" TileHeight="52" FrameCount="9"/>
+			<Left X="0" Y="156" TileWidth="58" TileHeight="48" FrameCount="9"/>
+			<Right X="0" Y="0" TileWidth="60" TileHeight="50" FrameCount="9"/>
+		</Sink>
+		<Position IsSail="true" Offset="17">
+			<Up X="0" Y="50" TileWidth="40" TileHeight="54" FrameCount="1"/>
+			<Down X="0" Y="104" TileWidth="42" TileHeight="52" FrameCount="1"/>
+			<Left X="0" Y="156" TileWidth="58" TileHeight="48" FrameCount="1"/>
+			<Right X="0" Y="0" TileWidth="60" TileHeight="50" FrameCount="1"/>
+		</Position>		
+		<Properties Attack="5" Defence="5" HP="50" Speed="4" Point="5" TimeDelayAttack="1.7"/>
+	</Unit>
+	<Unit name="Computer2">
+		<TileSet FileName="Tklpirschi_Trans" />
+		<Sink IsSail="true" Offset="34">
+			<Up X="0" Y="46" TileWidth="34" TileHeight="60" FrameCount="9"/>
+			<Down X="0" Y="106" TileWidth="36" TileHeight="72" FrameCount="9"/>
+			<Left X="0" Y="178" TileWidth="74" TileHeight="46" FrameCount="9"/>
+			<Right X="0" Y="0" TileWidth="76" TileHeight="46" FrameCount="9"/>
+		</Sink>
+		<Position IsSail="true" Offset="17">
+			<Up X="0" Y="46" TileWidth="34" TileHeight="60" FrameCount="1"/>
+			<Down X="0" Y="106" TileWidth="36" TileHeight="72" FrameCount="1"/>
+			<Left X="0" Y="178" TileWidth="74" TileHeight="46" FrameCount="1"/>
+			<Right X="0" Y="0" TileWidth="76" TileHeight="46" FrameCount="1"/>
+		</Position>		
+		<Properties Attack="5" Defence="5" HP="50" Speed="4" Point="10" TimeDelayAttack="1.3"/>
+	</Unit>
+	<Unit name="Computer3">
+		<TileSet FileName="Thandelsschiff_Trans" />
+		<Sink IsSail="true" Offset="34">
+			<Up X="0" Y="50" TileWidth="38" TileHeight="64" FrameCount="9"/>
+			<Down X="0" Y="114" TileWidth="38" TileHeight="80" FrameCount="9"/>
+			<Left X="0" Y="194" TileWidth="80" TileHeight="50" FrameCount="9"/>
+			<Right X="0" Y="0" TileWidth="76" TileHeight="50" FrameCount="9"/>
+		</Sink>
+		<Position IsSail="true" Offset="17">
+			<Up X="0" Y="50" TileWidth="38" TileHeight="64" FrameCount="1"/>
+			<Down X="0" Y="114" TileWidth="38" TileHeight="80" FrameCount="1"/>
+			<Left X="0" Y="194" TileWidth="80" TileHeight="50" FrameCount="1"/>
+			<Right X="0" Y="0" TileWidth="76" TileHeight="50" FrameCount="1"/>
+		</Position>		
+		<Properties Attack="5" Defence="5" HP="50" Speed="3" Point="5" TimeDelayAttack="1.1"/>
+	</Unit>
+	<Unit name="Computer4">
+		<TileSet FileName="Tgrokanbo_Trans"/>
+		<Sink IsSail="true" Offset="34">
+			<Up X="0" Y="58" TileWidth="42" TileHeight="82" FrameCount="9"/>
+			<Down X="0" Y="140" TileWidth="42" TileHeight="96" FrameCount="9"/>
+			<Left X="0" Y="236" TileWidth="106" TileHeight="56" FrameCount="9"/>
+			<Right X="0" Y="0" TileWidth="106" TileHeight="58" FrameCount="9"/>
+		</Sink>
+		<Position IsSail="true" Offset="17">
+			<Up X="0" Y="58" TileWidth="42" TileHeight="82" FrameCount="1"/>
+			<Down X="0" Y="140" TileWidth="42" TileHeight="96" FrameCount="1"/>
+			<Left X="0" Y="236" TileWidth="106" TileHeight="56" FrameCount="1"/>
+			<Right X="0" Y="0" TileWidth="106" TileHeight="58" FrameCount="1"/>
+		</Position>		
+		<Properties Attack="10" Defence="10" HP="100" Speed="3" Point="5" TimeDelayAttack="1.2"/>
+	</Unit>
+	
+	<Unit name="Computer5">
+		<TileSet FileName="Tfischerboot_Trans"/>
+		<Sink IsSail="true" Offset="34">
+			<Up X="0" Y="48" TileWidth="50" TileHeight="58" FrameCount="9"/>
+			<Down X="0" Y="106" TileWidth="50" TileHeight="68" FrameCount="9"/>
+			<Left X="0" Y="174" TileWidth="72" TileHeight="50" FrameCount="9"/>
+			<Right X="0" Y="0" TileWidth="70" TileHeight="48" FrameCount="9"/>
+		</Sink>
+		<Position IsSail="true" Offset="17">
+			<Up X="0" Y="48" TileWidth="50" TileHeight="58" FrameCount="1"/>
+			<Down X="0" Y="106" TileWidth="50" TileHeight="68" FrameCount="1"/>
+			<Left X="0" Y="174" TileWidth="72" TileHeight="50" FrameCount="1"/>
+			<Right X="0" Y="0" TileWidth="70" TileHeight="48" FrameCount="1"/>
+		</Position>		
+		<Properties Attack="7" Defence="6" HP="70" Speed="4" Point="5" TimeDelayAttack="1.4"/>
+	</Unit>
+	
+	<Unit name="Computer6">
+		<TileSet FileName="Tgrpirschi_Trans" />		
+		<Sink IsSail="true" Offset="34">
+			<Up X="0" Y="56" TileWidth="42" TileHeight="84" FrameCount="9"/>
+			<Down X="0" Y="140" TileWidth="42" TileHeight="96" FrameCount="9"/>
+			<Left X="0" Y="236" TileWidth="106" TileHeight="56" FrameCount="9"/>
+			<Right X="0" Y="0" TileWidth="106" TileHeight="56" FrameCount="9"/>
+		</Sink>
+		<Position IsSail="true" Offset="17">
+			<Up X="0" Y="56" TileWidth="42" TileHeight="84" FrameCount="1"/>
+			<Down X="0" Y="140" TileWidth="42" TileHeight="96" FrameCount="1"/>
+			<Left X="0" Y="236" TileWidth="106" TileHeight="56" FrameCount="1"/>
+			<Right X="0" Y="0" TileWidth="106" TileHeight="56" FrameCount="1"/>
+		</Position>		
+		<Properties Attack="5" Defence="5" HP="50" Speed="3" Point="5" TimeDelayAttack="1.6"/>
+	</Unit>		
+</Units>

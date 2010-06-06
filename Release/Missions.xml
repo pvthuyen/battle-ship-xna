@@ -1,0 +1,5 @@
+<Missions>
+	<Mission Level="1" TotalEnemies="0" TotalEnemiesAppearPerTimes="2" />
+	<Mission Level="2" TotalEnemies="0" TotalEnemiesAppearPerTimes="3" />
+	<Mission Level="3" TotalEnemies="0" TotalEnemiesAppearPerTimes="4" />			
+</Missions>
