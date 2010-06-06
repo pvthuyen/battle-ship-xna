@@ -37,9 +37,7 @@ namespace BattleShip.Core.GameComponents
 
         //handle input
         protected InputManager m_inputManager;
-        //handle sound
-        protected SoundManager m_soundManager;
-
+        
         private List<string> GetMenuItems(XmlNodeList nodeList)
         {
             List<string> lstItem = new List<string>();
@@ -163,8 +161,8 @@ namespace BattleShip.Core.GameComponents
             m_inputManager.EndHandler();
                         
             if (down || up)
-            {
-                //m_soundManager.MenuScroll.Play();   
+            {                
+                //SoundManager.m_SelectMenu.Play();
             }
 
             if (down)
@@ -265,8 +263,7 @@ namespace BattleShip.Core.GameComponents
             this.m_menuItems = new List<string>();
             
             m_spriteBatch = game.Services.GetService(typeof(SpriteBatch)) as SpriteBatch;
-            m_soundManager = game.Services.GetService(typeof(SoundManager)) as SoundManager;
-
+            
             m_inputManager = new InputManager();
 
             m_SelectedMenuItem = GameMenuItem.None;

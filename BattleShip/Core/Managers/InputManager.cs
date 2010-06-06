@@ -63,6 +63,11 @@ namespace BattleShip.Core.Managers
         {
             return (m_oldKeyboardState.IsKeyDown(key) && m_keyboardState.IsKeyUp(key)); 
         }
+
+        public bool IsKeyDown(Keys key)
+        {
+            return m_keyboardState.IsKeyDown(key);
+        }
         #endregion
 
         #region gamepad controls        

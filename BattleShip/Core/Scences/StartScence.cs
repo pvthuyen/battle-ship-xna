@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using BattleShip.Core.GameComponents;
 using BattleShip.Core.Managers;
+using Microsoft.Xna.Framework.Media;
 
 namespace BattleShip.Core.Scences
 {
@@ -87,6 +88,8 @@ namespace BattleShip.Core.Scences
         public override void ShowScreen()
         {            
             //play sound ....
+            //MediaPlayer.Play(SoundManager.m_startMusic);
+
             m_BattlePosition.X = -1 * m_BattleRect.Width;
             m_BattlePosition.Y = 40;
 
@@ -104,6 +107,7 @@ namespace BattleShip.Core.Scences
         public override void HideScreen()
         {
             //stop sound
+            //MediaPlayer.Stop();
 
             base.HideScreen();
         }
@@ -112,7 +116,7 @@ namespace BattleShip.Core.Scences
             : base(game)
         {
             this.m_textureElements = elements;
-            this.m_lstGameComponent.Add(new ImageComponent(game, background, ImageComponent.DrawMode.Center));
+            this.m_lstGameComponent.Add(new ImageComponent(game, background, ImageComponent.DrawMode.Stretch));
 
             m_BattleRect = new Rectangle(0, 0, 394, 96);
             m_ShipRect = new Rectangle(208, 97, 186, 65);

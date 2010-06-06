@@ -12,9 +12,8 @@ namespace BattleShip.Core.Scences
     {
         public HelpScence(Game game, Texture2D imgBackground, Texture2D imgForeground)
             : base(game)
-        {
-            this.m_lstGameComponent.Add(new ImageComponent(game, imgBackground, ImageComponent.DrawMode.Stretch));
-            this.m_lstGameComponent.Add(new ImageComponent(game, imgForeground, ImageComponent.DrawMode.Center));
+        {            
+            this.m_lstGameComponent.Add(new ImageComponent(game, imgForeground, ImageComponent.DrawMode.Stretch));
         }
     }
 }

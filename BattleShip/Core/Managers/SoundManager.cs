@@ -10,66 +10,93 @@ namespace BattleShip.Core.Managers
 {
     public class SoundManager
     {
-        private SoundEffect m_explosion;
+        static public Song m_backMusic;
+        static public Song m_startMusic;
 
-        public SoundEffect Explosion
+        static public SoundEffect m_explosion;
+        static public SoundEffect m_shipExplosion;
+
+        static public SoundEffect m_doubleMachineGunFire;
+        static public SoundEffect m_peashooterFire;
+
+        static public SoundEffect m_SelectMenu;
+        static public SoundEffect m_Thunder;
+        
+        static public SoundEffect m_powerGet;
+        static public SoundEffect m_powerShow;
+        static public SoundEffect m_newMeteor;
+        static public SoundEffect m_menuBack;
+        static public SoundEffect m_menuSelect;
+        static public SoundEffect m_menuScroll;
+
+        static public SoundEffect ShipExlosion
+        {
+            get { return m_shipExplosion; }
+        }
+
+        static public SoundEffect DoubleMachineGunFire 
+        {
+            get { return m_doubleMachineGunFire; }
+        }
+
+        static public SoundEffect PeashooterFire
+        {
+            get { return m_peashooterFire; }
+        }
+
+        static public SoundEffect Explosion
         {
             get { return m_explosion; }            
         }
-        private SoundEffect m_newMeteor;
 
-        public SoundEffect NewMeteor
+        static public SoundEffect NewMeteor
         {
             get { return m_newMeteor; }            
         }
-        private SoundEffect m_menuBack;
 
-        public SoundEffect MenuBack
+        static public SoundEffect MenuBack
         {
             get { return m_menuBack; }            
         }
-        private SoundEffect m_menuSelect;
 
-        public SoundEffect MenuSelect
+        static public SoundEffect MenuSelect
         {
             get { return m_menuSelect; }            
         }
-        private SoundEffect m_menuScroll;
 
-        public SoundEffect MenuScroll
+        static public SoundEffect MenuScroll
         {
             get { return m_menuScroll; }            
         }
-        private SoundEffect m_powerGet;
 
-        public SoundEffect PowerGet
+        static public SoundEffect PowerGet
         {
             get { return m_powerGet; }            
         }
-        private SoundEffect m_powerShow;
 
-        public SoundEffect PowerShow
+        static public SoundEffect PowerShow
         {
             get { return m_powerShow; }            
         }
-        private Song m_backMusic;
 
-        public Song BackMusic
+        static public Song BackMusic
         {
             get { return m_backMusic; }            
         }
-        private Song m_startMusic;
 
-        public Song StartMusic
+        static public Song StartMusic
         {
             get { return m_startMusic; }            
         }
 
-        public void LoadContent(ContentManager content)
-        {
-            /*
-            m_explosion = content.Load<SoundEffect>("explosion");
-             */
-        }
+        static public void LoadContent(ContentManager content)
+        {            
+            m_explosion = content.Load<SoundEffect>(@"Resource/Sound/RocketExplode");
+            m_shipExplosion = content.Load<SoundEffect>(@"Resource/Sound/ExplodeShip");
+            m_doubleMachineGunFire=content.Load<SoundEffect>(@"Resource/Sound/DoubleMachineGunFire");
+            m_peashooterFire = content.Load<SoundEffect>(@"Resource/Sound/PeashooterFire");
+            //m_startMusic = content.Load<Song>(@"Resource/Sound/Hawaiian_Sting");
+            //m_SelectMenu = content.Load<SoundEffect>(@"Resource/Sound/challenge_menu_mouseover");
+        }                
     }
 }

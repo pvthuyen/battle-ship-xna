@@ -25,16 +25,13 @@ namespace BattleShip
         SpriteBatch spriteBatch;
 
         ResourceManager m_ResourceManager;
-        SoundManager m_SoundManager;
-
+                
         GameScence m_ActiveScence;
         HelpScence m_HelpScence;
         StartScence m_StartScence;
         ActionScence m_ActionScence;
 
-        InputManager m_InputManager;
-
-       
+        InputManager m_InputManager;               
 
         public Game1()
         {
@@ -50,8 +47,7 @@ namespace BattleShip
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            // TODO: Add your initialization logic here            
             base.Initialize();
         }
 
@@ -66,11 +62,9 @@ namespace BattleShip
             this.Services.AddService(typeof(SpriteBatch), spriteBatch);
             // TODO: use this.Content to load your game content here
             
-            //load all sounds
-            m_SoundManager = new SoundManager();
-            m_SoundManager.LoadContent(this.Content);
-            this.Services.AddService(typeof(SoundManager), m_SoundManager);
-
+            //load all sounds            
+            SoundManager.LoadContent(Content);            
+                        
             //load all resource
             m_ResourceManager = new ResourceManager(this.Content);
             m_ResourceManager.LoadAllResource();
@@ -79,8 +73,8 @@ namespace BattleShip
             m_InputManager = new InputManager();
             
             //load scences
-            m_HelpScence = new HelpScence(this, m_ResourceManager.imgBackgroundHelpScence, m_ResourceManager.imgForegroundHelpScence);                        
-            m_StartScence = new StartScence(this, m_ResourceManager.smallFont, m_ResourceManager.largeFont, m_ResourceManager.imgBackgroundStartScence, m_ResourceManager.imgForegroundStartScence, m_ResourceManager.imgButton);
+            m_HelpScence = new HelpScence(this, ResourceManager.imgBackgroundHelpScence, ResourceManager.imgForegroundHelpScence);
+            m_StartScence = new StartScence(this, ResourceManager.smallFont, ResourceManager.largeFont, ResourceManager.imgBackgroundStartScence, ResourceManager.imgForegroundStartScence, ResourceManager.imgButton);
             m_ActionScence = new ActionScence(this);
 
             this.Components.Add(m_HelpScence);
@@ -113,8 +107,16 @@ namespace BattleShip
                 this.Exit();
 
             // TODO: Add your update logic here
-                        
+            if (m_ActiveScence == m_ActionScence)
+            {
+                if (m_ActionScence.IsReturnMainMenu)
+                {                    
+                    ShowScence(m_StartScence);  
+                }
+            }
+
             HandleScenceInput();
+
             base.Update(gameTime);
         }
 
@@ -165,12 +167,15 @@ namespace BattleShip
             switch (m_StartScence.MainMenu.SelectedMenuItem)
             {
                 case BattleShip.Core.GameComponents.TextMenuComponent.GameMenuItem.StartGame:
-                    m_ActionScence.GameMode = ActionScence.PlayMode.Play;
-                    IsMouseVisible = false;
+                    m_ActionScence.GameMode = ActionScence.GameState.PlayGame;
+                    IsMouseVisible = true;
+                    
+                    m_ActionScence.Restart();
+
                     ShowScence(m_ActionScence);                    
                     break;
                 case BattleShip.Core.GameComponents.TextMenuComponent.GameMenuItem.EditMap:
-                    m_ActionScence.GameMode = ActionScence.PlayMode.Edit;
+                    m_ActionScence.GameMode = ActionScence.GameState.EditGame;
                     IsMouseVisible = true;
                     ShowScence(m_ActionScence);
                     break;

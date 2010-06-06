@@ -9,38 +9,55 @@ namespace BattleShip.Core.Managers
 {
     public class ResourceManager
     {
+        static private UnitManager m_UnitManager;
+
         private ContentManager m_contentManager;
-
-        public Texture2D imgPlayer;
-
+                
         //texture for help scence
-        public Texture2D imgBackgroundHelpScence;
-        public Texture2D imgForegroundHelpScence;
+        static public Texture2D imgBackgroundHelpScence;
+        static public Texture2D imgForegroundHelpScence;
 
         //texture for start scence
-        public Texture2D imgBackgroundStartScence;
-        public Texture2D imgForegroundStartScence;
+        static public Texture2D imgBackgroundStartScence;
+        static public Texture2D imgForegroundStartScence;
 
-        public Texture2D imgButton;
+        static public Texture2D imgButton;
 
-        public Texture2D imgGameScreen;
-        public Texture2D imgGameEditor;
+        static public Texture2D imgGameScreen;
+        static public Texture2D imgGameEditor;
 
-        public Texture2D imgPoint;
+        static public Texture2D imgPoint;
+
+        static public Texture2D imgExplosion;
+
+        static public Texture2D imgPlayerStatus;
+
+        static public Texture2D imgStar;
+
+        static public Texture2D imgBonus;
+
+        //fishs
+        static public Texture2D imgJumpingFish;
+        static public Texture2D imgFish;
 
         //sprite fonts
-        public SpriteFont smallFont;
-        public SpriteFont largeFont;
+        static public SpriteFont smallFont;
+        static public SpriteFont largeFont;
+
+        static public UnitManager Units
+        {
+            get { return m_UnitManager; }
+        }
 
         public ResourceManager(ContentManager contenManager)
         {
-            this.m_contentManager = contenManager;
+            this.m_contentManager = contenManager;            
         }
 
         public void LoadAllResource()
         {            
             imgBackgroundHelpScence = this.m_contentManager.Load<Texture2D>(@"Resource/Menu/1");
-            imgForegroundHelpScence = this.m_contentManager.Load<Texture2D>(@"Resource/Menu/main_1260140920_happy_aquarium_cheats");
+            imgForegroundHelpScence = this.m_contentManager.Load<Texture2D>(@"Resource/Menu/BG3");
 
             imgBackgroundStartScence = this.m_contentManager.Load<Texture2D>(@"Resource/Menu/1");
             imgForegroundStartScence = this.m_contentManager.Load<Texture2D>(@"Resource/Menu/intro");
@@ -52,12 +69,22 @@ namespace BattleShip.Core.Managers
 
             smallFont = this.m_contentManager.Load<SpriteFont>(@"Font/Arial");
             largeFont = this.m_contentManager.Load<SpriteFont>(@"Font/Arial");
-
-            imgPlayer = this.m_contentManager.Load<Texture2D>(@"Resource/Sprite/Computer/Tboot_Trans");
+                        
             imgPoint = this.m_contentManager.Load<Texture2D>(@"Resource/Background/point");
+
+            imgExplosion = this.m_contentManager.Load<Texture2D>(@"Resource/Sprite/Bullet/explosions");
+
+            imgStar = this.m_contentManager.Load<Texture2D>(@"Resource/Sprite/Animations/Star_Trans");
+            imgBonus = this.m_contentManager.Load<Texture2D>(@"Resource/Sprite/Animations/Bonus");
+
+            imgJumpingFish = this.m_contentManager.Load<Texture2D>(@"Resource/Sprite/Animations/Jumping Fish_Trans");
+            imgFish = this.m_contentManager.Load<Texture2D>(@"Resource/Sprite/Animations/Fish_Trans");
+
+            imgPlayerStatus = this.m_contentManager.Load<Texture2D>(@"Resource/Background/PlayerStatus");
+            m_UnitManager = new UnitManager(Utils.Utility.strSpritePath, Utils.Utility.strBulletPath, m_contentManager);
         }
 
-        internal Texture2D LoadTexture(string sFileName)
+        public Texture2D LoadTexture(string sFileName)
         {
             return this.m_contentManager.Load<Texture2D>(sFileName);
         }

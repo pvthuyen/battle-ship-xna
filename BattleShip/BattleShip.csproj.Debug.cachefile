@@ -3,7 +3,6 @@ Content\Resource\Sprite\Computer\Tboot_Trans.xnb
 Content\Resource\Sprite\Computer\Tfischerboot_Trans.xnb
 Content\Resource\Sprite\Computer\Tgrokanbo_Trans.xnb
 Content\Resource\Menu\1.xnb
-Content\Resource\Menu\main_1260140920_happy_aquarium_cheats.xnb
 Content\Resource\Sprite\Computer\Thandelsschiff_Trans.xnb
 Content\Resource\Sprite\Computer\Tklpirschi_Trans.xnb
 Content\Resource\Sprite\Computer\Twikingerschiff_Trans.xnb
@@ -13,11 +12,26 @@ Content\Resource\Background\fulltileset_alpha.xnb
 Content\Resource\Background\gamescreen.xnb
 Content\Resource\Background\editorimages.xnb
 Content\Resource\Background\point.xnb
+Content\Resource\Sprite\Bullet\explosions.xnb
+Content\Resource\Sprite\Bullet\missle2.xnb
+Content\Resource\Sprite\Bullet\bullet1.xnb
+Content\Resource\Sprite\Computer\Tgrpirschi_Trans.xnb
+Content\Resource\Sprite\Computer\Tkanonenschiffklein_Trans.xnb
+Content\Resource\Sprite\Bullet\Bullet2.xnb
+Content\Resource\Background\PlayerStatus.xnb
+Content\Resource\Sound\DoubleMachineGunFire.xnb
+Content\Resource\Sound\ExplodeShip.xnb
+Content\Resource\Sound\PeashooterFire.xnb
+Content\Resource\Sound\RocketExplode.xnb
+Content\Resource\Sprite\Animations\Fish_Trans.xnb
+Content\Resource\Sprite\Animations\Jumping Fish_Trans.xnb
+Content\Resource\Sprite\Animations\Star_Trans.xnb
+Content\Resource\Menu\BG3.xnb
+Content\Resource\Sprite\Animations\Bonus.xnb
 Content\Resource\Sprite\Computer\Tboot_Trans.png
 Content\Resource\Sprite\Computer\Tfischerboot_Trans.png
 Content\Resource\Sprite\Computer\Tgrokanbo_Trans.png
 Content\Resource\Menu\1.jpg
-Content\Resource\Menu\main_1260140920_happy_aquarium_cheats.jpg
 Content\Resource\Sprite\Computer\Thandelsschiff_Trans.png
 Content\Resource\Sprite\Computer\Tklpirschi_Trans.png
 Content\Resource\Sprite\Computer\Twikingerschiff_Trans.png
@@ -27,3 +41,19 @@ Content\Resource\Background\fulltileset_alpha.png
 Content\Resource\Background\gamescreen.png
 Content\Resource\Background\editorimages.png
 Content\Resource\Background\point.PNG
+Content\Resource\Sound\DoubleMachineGunFire.wav
+Content\Resource\Sound\ExplodeShip.wav
+Content\Resource\Sound\PeashooterFire.wav
+Content\Resource\Sound\RocketExplode.wav
+Content\Resource\Sprite\Bullet\explosions.png
+Content\Resource\Sprite\Bullet\missle2.png
+Content\Resource\Sprite\Bullet\bullet1.png
+Content\Resource\Sprite\Animations\Fish_Trans.png
+Content\Resource\Sprite\Animations\Jumping Fish_Trans.png
+Content\Resource\Sprite\Computer\Tgrpirschi_Trans.png
+Content\Resource\Sprite\Computer\Tkanonenschiffklein_Trans.png
+Content\Resource\Sprite\Bullet\Bullet2.png
+Content\Resource\Background\PlayerStatus.png
+Content\Resource\Sprite\Animations\Star_Trans.png
+Content\Resource\Menu\BG3.png
+Content\Resource\Sprite\Animations\Bonus.png

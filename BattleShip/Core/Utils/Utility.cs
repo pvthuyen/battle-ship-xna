@@ -34,5 +34,11 @@ namespace BattleShip.Core.Utils
             return retval;
 
         }
+
+        static public string strMapPath = "Maps.xml";
+        static public string strBulletPath = "Bullets.xml";
+        static public string strSpritePath = "Sprite.xml";
+        static public string strGameMenuPath = "GameMenu.xml";
+        static public string strMissionPath = "Missions.xml";
     }
 }
